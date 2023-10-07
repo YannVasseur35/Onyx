@@ -12,12 +12,13 @@ Onyx est une pierre précieuse de couleur noire. J'ai donnée ce nom à ce proje
 [Step1 : structure de solution](docs/steps/step1.md)
 
 
-## Git - branch
+## Git
+
+Repo : https://dev.azure.com/ReactorLab/_git/Onyx
 
 Vous devrez connaitre quelques commandes git de base très simple pour "naviguer" dans les branches de ce repo. Voici ces branches (à ce stade)
 
 - master : branch principale (pas utile pour vous dans le cadre d'un apprentissage)
-- develop : branche de travail (pas utile pour vous dans le cadre d'un apprentissage)
 - Step1 : projet de base (git checkout Step1)
 
 Pour changer de branche :
