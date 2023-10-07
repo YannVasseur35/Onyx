@@ -1,0 +1,86 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.7.34018.315
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Éléments de solution", "Éléments de solution", "{F93F236F-AFA0-42DB-B233-C8C6E6DFFF71}"
+	ProjectSection(SolutionItems) = preProject
+		.dockerignore = .dockerignore
+		.editorconfig = .editorconfig
+		.gitignore = .gitignore
+		LICENSE = LICENSE
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{F8EB0860-06BA-4B3D-BA2D-695EBF31FEFD}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0E08CF67-25C5-4AB6-B0F5-F7206E1DFFF2}"
+	ProjectSection(SolutionItems) = preProject
+		tests\Onyx.Core.Tests\Onyx.Core.Tests.csproj = tests\Onyx.Core.Tests\Onyx.Core.Tests.csproj
+	EndProjectSection
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Onyx.Application", "src\Onyx.Application\Onyx.Application.csproj", "{785F86F0-E43F-4A05-9DE4-FD9E2F501CF7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Onyx.Core", "src\Onyx.Core\Onyx.Core.csproj", "{D0E73587-CCB7-455C-A8B9-10D536B978F4}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Onyx.Infrastructure", "src\Onyx.Infrastructure\Onyx.Infrastructure.csproj", "{1A5E1138-7961-453D-8ED6-F785690A6ED0}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Onyx.Web.Api", "src\Onyx.Web.Api\Onyx.Web.Api.csproj", "{CC8D0093-C4D8-4F01-B847-E1B01D319601}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Onyx.Application.Tests", "tests\Onyx.Application.Tests\Onyx.Application.Tests.csproj", "{B1BA5EF1-5FE2-41D2-BC56-2FBB97596DD7}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Onyx.Infrastructure.Tests", "tests\Onyx.Infrastructure.Tests\Onyx.Infrastructure.Tests.csproj", "{3DC98618-523B-44EA-8B6B-F0E7808D827E}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Onyx.Web.Api.Tests", "tests\Onyx.Web.Api.Tests\Onyx.Web.Api.Tests.csproj", "{4617558E-5ADB-4085-AF92-AF1C2F042749}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{785F86F0-E43F-4A05-9DE4-FD9E2F501CF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{785F86F0-E43F-4A05-9DE4-FD9E2F501CF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{785F86F0-E43F-4A05-9DE4-FD9E2F501CF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{785F86F0-E43F-4A05-9DE4-FD9E2F501CF7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0E73587-CCB7-455C-A8B9-10D536B978F4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0E73587-CCB7-455C-A8B9-10D536B978F4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0E73587-CCB7-455C-A8B9-10D536B978F4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0E73587-CCB7-455C-A8B9-10D536B978F4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A5E1138-7961-453D-8ED6-F785690A6ED0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A5E1138-7961-453D-8ED6-F785690A6ED0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A5E1138-7961-453D-8ED6-F785690A6ED0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A5E1138-7961-453D-8ED6-F785690A6ED0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CC8D0093-C4D8-4F01-B847-E1B01D319601}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CC8D0093-C4D8-4F01-B847-E1B01D319601}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CC8D0093-C4D8-4F01-B847-E1B01D319601}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CC8D0093-C4D8-4F01-B847-E1B01D319601}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B1BA5EF1-5FE2-41D2-BC56-2FBB97596DD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B1BA5EF1-5FE2-41D2-BC56-2FBB97596DD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B1BA5EF1-5FE2-41D2-BC56-2FBB97596DD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B1BA5EF1-5FE2-41D2-BC56-2FBB97596DD7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3DC98618-523B-44EA-8B6B-F0E7808D827E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3DC98618-523B-44EA-8B6B-F0E7808D827E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3DC98618-523B-44EA-8B6B-F0E7808D827E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3DC98618-523B-44EA-8B6B-F0E7808D827E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4617558E-5ADB-4085-AF92-AF1C2F042749}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4617558E-5ADB-4085-AF92-AF1C2F042749}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4617558E-5ADB-4085-AF92-AF1C2F042749}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4617558E-5ADB-4085-AF92-AF1C2F042749}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{785F86F0-E43F-4A05-9DE4-FD9E2F501CF7} = {F8EB0860-06BA-4B3D-BA2D-695EBF31FEFD}
+		{D0E73587-CCB7-455C-A8B9-10D536B978F4} = {F8EB0860-06BA-4B3D-BA2D-695EBF31FEFD}
+		{1A5E1138-7961-453D-8ED6-F785690A6ED0} = {F8EB0860-06BA-4B3D-BA2D-695EBF31FEFD}
+		{CC8D0093-C4D8-4F01-B847-E1B01D319601} = {F8EB0860-06BA-4B3D-BA2D-695EBF31FEFD}
+		{B1BA5EF1-5FE2-41D2-BC56-2FBB97596DD7} = {0E08CF67-25C5-4AB6-B0F5-F7206E1DFFF2}
+		{3DC98618-523B-44EA-8B6B-F0E7808D827E} = {0E08CF67-25C5-4AB6-B0F5-F7206E1DFFF2}
+		{4617558E-5ADB-4085-AF92-AF1C2F042749} = {0E08CF67-25C5-4AB6-B0F5-F7206E1DFFF2}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {15FFD2C8-9B91-47BA-AC83-19552CDF8D4F}
+	EndGlobalSection
+EndGlobal
