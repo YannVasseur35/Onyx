@@ -55,6 +55,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "steps", "steps", "{55576E77-86EF-4393-94FD-0183E6A2876C}"
 	ProjectSection(SolutionItems) = preProject
 		docs\steps\step1.md = docs\steps\step1.md
+		docs\steps\step2.md = docs\steps\step2.md
 	EndProjectSection
 EndProject
 Global
