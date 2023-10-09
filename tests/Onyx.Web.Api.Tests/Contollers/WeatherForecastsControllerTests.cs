@@ -1,17 +1,21 @@
-﻿using Onyx.Application.Dtos;
-using System;
-using System.Collections.Generic;
-
-namespace Onyx.Web.Api.Tests.Contollers
+﻿namespace Onyx.Web.Api.Tests.Contollers
 {
-    public class WeatherForecastsControllerTests
+    public class WeatherForecastsControllerTests : IClassFixture<WebApplicationFactory<Program>>
     {
-        private readonly HttpClient _httpClient = new() { BaseAddress = new Uri("https://localhost:7006") };
         private const string baseEndPoint = "/api/weatherforecasts";
+
+        private readonly WebApplicationFactory<Program> _factory;
+
+        public WeatherForecastsControllerTests(WebApplicationFactory<Program> factory)
+        {
+            _factory = factory;
+        }
 
         [Fact]
         public async Task GetAllWeatherForecasts_ShouldReturn_Ok()
         {
+            using var _httpClient = _factory.CreateClient();
+
             //Arrange
             var expectedStatusCode = System.Net.HttpStatusCode.OK;
 
