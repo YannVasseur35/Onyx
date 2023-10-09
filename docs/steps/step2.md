@@ -18,7 +18,7 @@ Il faudra à un moment faire correspondre les données entre ces objets (data - 
 Considérez un objet dto comme un object publique à destination d'un tiers indépendants, qui fera ce qu'il veut de cette donnée.
 
 Un bulletin météo c'est 
-- des informations techniques (température, hydormétrie etc)
+- des informations techniques (température, hydrométrie, pression atmo, etc) On va prendre que la température. 
 - attribué à un lieu et à un moment (un datetime) 
 
 ```c#
