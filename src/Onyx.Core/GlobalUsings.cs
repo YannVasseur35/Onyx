@@ -1,0 +1,1 @@
+﻿global using Onyx.Core.Models.Domain;

@@ -1,6 +1,8 @@
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddSingleton<INotificationsAppServices, NotificationsAppServices>();
+builder.Services.AddSingleton<IWeatherForecastAppServices, WeatherForecastAppServices>();
 
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();

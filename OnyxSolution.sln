@@ -43,6 +43,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{9EC63DC7-1
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{E18D621F-08F0-4C7F-A735-832E6AD32B2B}"
 	ProjectSection(SolutionItems) = preProject
+		docs\images\appservice.jpg = docs\images\appservice.jpg
 		docs\images\dotnet-onion-ddd-cqrs-es.jpg = docs\images\dotnet-onion-ddd-cqrs-es.jpg
 		docs\images\onion-arch1.png = docs\images\onion-arch1.png
 		docs\images\onion-arch2.jpg = docs\images\onion-arch2.jpg
@@ -57,6 +58,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "steps", "steps", "{55576E77
 		docs\steps\step1.md = docs\steps\step1.md
 		docs\steps\step2.md = docs\steps\step2.md
 		docs\steps\step3.md = docs\steps\step3.md
+		docs\steps\step4.md = docs\steps\step4.md
 	EndProjectSection
 EndProject
 Global
