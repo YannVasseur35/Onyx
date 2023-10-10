@@ -30,10 +30,10 @@ comprendre ce qu'y a été fait à chaque étape.
 
 ## Sommaire
 
-[Step1 : Structure de solution](docs/steps/step1.md)
-[Step2 : Premier endpoint Api](docs/steps/step2.md)
-[Step3 : Test endpoint Api Rest](docs/steps/step3.md)
-[Step4 : Application Service](docs/steps/step4.md)
+- [Step1 : Structure de solution](docs/steps/step1.md)
+- [Step2 : Premier endpoint Api](docs/steps/step2.md)
+- [Step3 : Test endpoint Api Rest](docs/steps/step3.md)
+- [Step4 : Application Service](docs/steps/step4.md)
 
 
 ## Git
