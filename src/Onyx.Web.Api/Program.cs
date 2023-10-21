@@ -1,8 +1,12 @@
+using Onyx.Core.Interfaces;
+using Onyx.Infrastructure.Services;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddSingleton<INotificationsAppServices, NotificationsAppServices>();
 builder.Services.AddSingleton<IWeatherForecastAppServices, WeatherForecastAppServices>();
+builder.Services.AddSingleton<IWeatherForecastDataServices, WeatherForecastDataServices>();
 
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();

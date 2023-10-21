@@ -1,5 +1,8 @@
 ﻿using Onyx.Application.Dtos;
 using Onyx.Application.Interfaces;
+using Onyx.Core.Interfaces;
+using Onyx.Core.Models.Domain;
+using Onyx.Infrastructure.Services;
 
 namespace Onyx.Application.Tests
 {
@@ -7,11 +10,17 @@ namespace Onyx.Application.Tests
     {
         private readonly IWeatherForecastAppServices _weatherForecastAppServices;
         private readonly Mock<INotificationsAppServices> _notificationsServices;
+        private readonly Mock<IWeatherForecastDataServices> _weatherForecastDataServices;
 
         public WeatherForecastAppServicesTests()
         {
             _notificationsServices = new Mock<INotificationsAppServices>();
-            _weatherForecastAppServices = new WeatherForecastAppServices(_notificationsServices.Object);
+            _weatherForecastDataServices = new Mock<IWeatherForecastDataServices>();
+
+            _weatherForecastAppServices = new WeatherForecastAppServices(
+                _notificationsServices.Object,
+                _weatherForecastDataServices.Object
+            );
         }
 
         [Fact]

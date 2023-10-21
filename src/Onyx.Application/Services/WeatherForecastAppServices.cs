@@ -1,31 +1,26 @@
-﻿namespace Onyx.Application.Services
+﻿using Onyx.Core.Interfaces;
+using Onyx.Application.Extensions;
+
+namespace Onyx.Application.Services
 {
     public class WeatherForecastAppServices : IWeatherForecastAppServices
     {
         private readonly INotificationsAppServices _notificationsService;
+        private readonly IWeatherForecastDataServices _weatherForecastDataServices;
 
-        public WeatherForecastAppServices(INotificationsAppServices notificationsService)
+        public WeatherForecastAppServices(
+            INotificationsAppServices notificationsService,
+            IWeatherForecastDataServices weatherForecastDataServices)
         {
             _notificationsService = notificationsService;
+            _weatherForecastDataServices = weatherForecastDataServices;
         }
 
         public async Task<IEnumerable<WeatherForecastDto>?> GetAllWeatherForecasts()
         {
-            var mockList = new List<WeatherForecastDto>()
-            {
-                new WeatherForecastDto()
-                {
-                     TemperatureC = 19,
-                     City = "Paris"
-                },
-                new WeatherForecastDto()
-                {
-                     TemperatureC = 24,
-                     City = "Rennes"
-                }
-            };
+            var weatherForecastDtoList = await _weatherForecastDataServices.GetAllAsync();
 
-            return mockList;
+            return weatherForecastDtoList.Select(x => x.ToWeatherForecastDto());
         }
 
         public async Task<Operation> CreateWeatherForecasts(WeatherForecastDto weatherForecastDto)

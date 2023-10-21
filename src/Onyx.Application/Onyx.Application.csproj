@@ -13,6 +13,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Onyx.Core\Onyx.Core.csproj" />
+    <ProjectReference Include="..\Onyx.Infrastructure\Onyx.Infrastructure.csproj" />
   </ItemGroup>
 
 </Project>

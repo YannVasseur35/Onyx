@@ -48,6 +48,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{E18D62
 		docs\images\onion-arch1.png = docs\images\onion-arch1.png
 		docs\images\onion-arch2.jpg = docs\images\onion-arch2.jpg
 		docs\images\onion-arch3.png = docs\images\onion-arch3.png
+		docs\images\onion-arch4.jpg = docs\images\onion-arch4.jpg
 		docs\images\onion_architecture.webp = docs\images\onion_architecture.webp
 		docs\images\onyx.jpg = docs\images\onyx.jpg
 		docs\images\solution-step1.jpg = docs\images\solution-step1.jpg
@@ -59,6 +60,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "steps", "steps", "{55576E77
 		docs\steps\step2.md = docs\steps\step2.md
 		docs\steps\step3.md = docs\steps\step3.md
 		docs\steps\step4.md = docs\steps\step4.md
+		docs\steps\step5.md = docs\steps\step5.md
 	EndProjectSection
 EndProject
 Global
