@@ -18,9 +18,9 @@ namespace Onyx.Application.Services
 
         public async Task<IEnumerable<WeatherForecastDto>?> GetAllWeatherForecasts()
         {
-            var weatherForecastDtoList = await _weatherForecastDataServices.GetAllAsync();
+            var weatherForecastList = await _weatherForecastDataServices.GetAllAsync();
 
-            return weatherForecastDtoList.Select(x => x.ToWeatherForecastDto());
+            return weatherForecastList.Select(x => x.ToWeatherForecastDto());
         }
 
         public async Task<Operation> CreateWeatherForecasts(WeatherForecastDto weatherForecastDto)

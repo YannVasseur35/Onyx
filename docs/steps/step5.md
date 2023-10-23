@@ -153,9 +153,9 @@ public class WeatherForecastAppServices : IWeatherForecastAppServices
 
      public async Task<IEnumerable<WeatherForecastDto>?> GetAllWeatherForecasts()
      {
-        var weatherForecastDtoList = await _weatherForecastDataServices.GetAllAsync();
+        var weatherForecastList = await _weatherForecastDataServices.GetAllAsync();
 
-        return weatherForecastDtoList.Select(x => new WeatherForecast(x)); //PAS BIEN !
+        return weatherForecastList.Select(x => new WeatherForecast(x)); //PAS BIEN !
      }
      
      (...)
