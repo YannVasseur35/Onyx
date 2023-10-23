@@ -222,24 +222,36 @@ Et ça marchera. Cependant on va vite comprendre pourquoi on va avoir besoin d'u
 
 ### Tests
 
-Nos tests Onyw.Application.Tests ne fonctionnent plus car il nous manque l'injection d'un mock de IWeatherForecastDataServices. 
+Nos tests Onyx.Application.Tests ne fonctionnent plus car il nous manque l'injection d'un mock de IWeatherForecastDataServices. 
+
+On va en profiter pour créer un nouveau test dans Onyx.Infrastructure.Tests, qui pour le moment va ressembler à celui de Onyx.Application.Tests
+
+```c# 
+ public class WeatherForecastDataServicesTests
+ {
+     private readonly IWeatherForecastDataServices _weatherForecastDataServices;
+
+     public WeatherForecastDataServicesTests()
+     {
+         _weatherForecastDataServices = new WeatherForecastDataServices();
+     }
+
+     [Fact]
+     public async Task GetAllWeatherForecasts_ShouldReturn_NoNull()
+     {
+         //Arrange
+
+         //Act
+         var results = await _weatherForecastDataServices.GetAllAsync();
+
+         //Assert
+         Assert.NotNull(results);
+     }
+ }
+```
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-https://learn.microsoft.com/en-us/dotnet/architecture/microservices/microservice-ddd-cqrs-patterns/infrastructure-persistence-layer-design
+ 
 
 
 
