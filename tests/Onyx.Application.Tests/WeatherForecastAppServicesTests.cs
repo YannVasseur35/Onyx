@@ -1,4 +1,5 @@
-﻿using Onyx.Application.Dtos;
+﻿using AutoMapper;
+using Onyx.Application.Dtos;
 using Onyx.Application.Interfaces;
 using Onyx.Core.Interfaces;
 using Onyx.Core.Models.Domain;
@@ -11,15 +12,18 @@ namespace Onyx.Application.Tests
         private readonly IWeatherForecastAppServices _weatherForecastAppServices;
         private readonly Mock<INotificationsAppServices> _notificationsServices;
         private readonly Mock<IWeatherForecastDataServices> _weatherForecastDataServices;
+        private readonly Mock<IMapper> _mapper;
 
         public WeatherForecastAppServicesTests()
         {
             _notificationsServices = new Mock<INotificationsAppServices>();
             _weatherForecastDataServices = new Mock<IWeatherForecastDataServices>();
+            _mapper = new Mock<IMapper>();
 
             _weatherForecastAppServices = new WeatherForecastAppServices(
                 _notificationsServices.Object,
-                _weatherForecastDataServices.Object
+                _weatherForecastDataServices.Object,
+                _mapper.Object
             );
         }
 
@@ -33,6 +37,25 @@ namespace Onyx.Application.Tests
 
             //Assert
             Assert.NotNull(results);
+        }
+
+        [Fact]
+        public async Task GetAllWeatherForecasts_ShouldReturn_2Items()
+        {
+            //Arrange
+            IEnumerable<WeatherForecast>? mocks = new List<WeatherForecast> {
+                new WeatherForecast() { City = "Paris", TemperatureC = 22},
+                new WeatherForecast() { City = "Rennes", TemperatureC = 16},
+            };
+
+            _weatherForecastDataServices.Setup(x => x.GetAllAsync()).ReturnsAsync(mocks);
+
+            //Act
+            var results = await _weatherForecastAppServices.GetAllWeatherForecasts();
+
+            //Assert
+            Assert.NotNull(results);
+            Assert.Equal<int>(mocks.Count(), results.Count());
         }
 
         [Fact]

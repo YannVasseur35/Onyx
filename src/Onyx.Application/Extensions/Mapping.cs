@@ -1,5 +1,6 @@
 ﻿namespace Onyx.Application.Extensions
 {
+    [Obsolete]
     public static class Mapping
     {
         public static WeatherForecastDto ToWeatherForecastDto(this WeatherForecast model)

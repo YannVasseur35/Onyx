@@ -3,6 +3,9 @@ using Onyx.Infrastructure.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
+//AutoMapper init
+builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
+
 // Add services to the container.
 builder.Services.AddSingleton<INotificationsAppServices, NotificationsAppServices>();
 builder.Services.AddSingleton<IWeatherForecastAppServices, WeatherForecastAppServices>();

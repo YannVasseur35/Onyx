@@ -3,7 +3,11 @@
 
 # Onyx Solution 
 
-Une solution Microsoft .net 7.0 / C# permettant l'apprentissage de concepts d'architecture, de clean code, de tests...
+Une solution Microsoft .net 7.0 / C# permettant l'apprentissage de concepts de software design, d'architecture, de clean code, de tests...
+
+Permet de partir sur de bonnes bases pour un petit/moyen projet, basé sur quelques années d'expériences dans le software design. 
+
+----
 
 Onyx est une pierre précieuse de couleur noire. J'ai donnée ce nom à ce projet d'apprentissage car il est court, facilement identifiable, abstrait, et j'aime bien donner des "noms de code" à un projet. 
 
@@ -34,9 +38,9 @@ Ou sinon, vous prenez la branche master qui est la branche la plus complète et 
 - [Step1 : Structure de solution](docs/steps/step1.md)
 - [Step2 : Premier endpoint Api](docs/steps/step2.md)
 - [Step3 : Test endpoint Api Rest](docs/steps/step3.md)
-- [Step4 : Application Service](docs/steps/step4.md)
-- [Step5 : DataService](docs/steps/step5.md)
-
+- [Step4 : Application Service et Tests](docs/steps/step4.md)
+- [Step5 : DataService et Tests](docs/steps/step5.md)
+- [Step6 : Mapping et Tests](docs/steps/step6.md)
 
 ## Git
 
