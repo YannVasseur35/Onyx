@@ -1,4 +1,4 @@
-# Step 7 : ORM (Entity Framework)
+# Step 7 : Repository Pattern & ORM (Entity Framework)
 
 Petit rappel. A ce stade on a :
 
