@@ -41,6 +41,7 @@ Ou sinon, vous prenez la branche master qui est la branche la plus complète et 
 - [Step4 : Application Service et Tests](docs/steps/step4.md)
 - [Step5 : DataService et Tests](docs/steps/step5.md)
 - [Step6 : Mapping et Tests](docs/steps/step6.md)
+- [Step7 : ORM (Entity Framework) et Tests](docs/steps/step7.md)
 
 ## Git
 
