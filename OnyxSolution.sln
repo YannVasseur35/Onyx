@@ -45,6 +45,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{E18D62
 	ProjectSection(SolutionItems) = preProject
 		docs\images\appservice.jpg = docs\images\appservice.jpg
 		docs\images\dotnet-onion-ddd-cqrs-es.jpg = docs\images\dotnet-onion-ddd-cqrs-es.jpg
+		docs\images\EF-Migration.png = docs\images\EF-Migration.png
 		docs\images\onion-arch1.png = docs\images\onion-arch1.png
 		docs\images\onion-arch2.jpg = docs\images\onion-arch2.jpg
 		docs\images\onion-arch3.png = docs\images\onion-arch3.png
@@ -63,6 +64,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "steps", "steps", "{55576E77
 		docs\steps\step5.md = docs\steps\step5.md
 		docs\steps\step6.md = docs\steps\step6.md
 		docs\steps\step7.md = docs\steps\step7.md
+		docs\steps\step8.md = docs\steps\step8.md
 	EndProjectSection
 EndProject
 Global
