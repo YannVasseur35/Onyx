@@ -11,7 +11,9 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 //Entity Framework Db Context
-builder.Services.AddDbContext<OnyxDbContext>();
+builder.Services.AddDbContext<OnyxDbContext>(options =>
+    options.UseSqlite(builder.Configuration?.GetConnectionString("DefaultConnection"), x => x.MigrationsAssembly("Onyx.Infrastructure"))
+);
 
 // Add services to the container.
 builder.Services.AddSingleton<INotificationsAppServices, NotificationsAppServices>();
