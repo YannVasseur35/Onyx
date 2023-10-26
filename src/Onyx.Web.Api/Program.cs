@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Options;
 using Onyx.Core.Interfaces;
 using Onyx.Infrastructure.Datas;
 using Onyx.Infrastructure.Services;
@@ -11,12 +12,14 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 //Entity Framework Db Context
-builder.Services.AddDbContext<OnyxDbContext>();
+builder.Services.AddDbContext<OnyxDbContext>(options =>
+    options.UseSqlite(builder.Configuration?.GetConnectionString("DefaultConnection"), x => x.MigrationsAssembly("Onyx.Infrastructure"))
+);
 
 // Add services to the container.
-builder.Services.AddSingleton<INotificationsAppServices, NotificationsAppServices>();
-builder.Services.AddSingleton<IWeatherForecastAppServices, WeatherForecastAppServices>();
-builder.Services.AddSingleton<IWeatherForecastDataServices, WeatherForecastDataServices>();
+builder.Services.AddScoped<INotificationsAppServices, NotificationsAppServices>();
+builder.Services.AddScoped<IWeatherForecastAppServices, WeatherForecastAppServices>();
+builder.Services.AddScoped<IWeatherForecastDataServices, WeatherForecastDataServices>();
 
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();

@@ -60,29 +60,23 @@ On commence par créer notre OnyxDbContext qui contriendra un DbSet de WeatherFo
 ```c#
 public class OnyxDbContext : DbContext
 {
-    protected readonly IConfiguration Configuration;
-
-    public OnyxDbContext(IConfiguration configuration)
+    public OnyxDbContext(DbContextOptions<OnyxDbContext> options) : base(options)
     {
-        Configuration = configuration;
     }
-
-    protected override void OnConfiguring(DbContextOptionsBuilder options)
-    {
-        options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"));
-    } 
 
     public DbSet<WeatherForecastEntity> WeatherForecasts { get; set; }
 }
 ```
 
-Notez qu'on va mettre la connection string dans un fichier de settings. Ce qui va nous permettre de mettre le fichier de base de données Sqlite ou on veut, selon notre environnement (dev, staging, prod)
+Notez qu'on va mettre la connection string dans un fichier de settings. Ce qui va nous permettre de mettre le fichier de base de données Sqlite où on veut, selon notre environnement (dev, staging, prod)
 
 Dans notre Program.cs on rajoute
 
 ```c#
 //Entity Framework Db Context
-builder.Services.AddDbContext<OnyxDbContext>();
+builder.Services.AddDbContext<OnyxDbContext>(options =>
+    options.UseSqlite(builder.Configuration?.GetConnectionString("DefaultConnection"))
+);
 ```
 
 ### DB Init
@@ -185,11 +179,10 @@ Le soucis ici, c'est que notre projet de démarrage qui contient Program.cs n'es
 Pour cela on va le préciser a la configuration du DbContext
 
 ```c#
-protected override void OnConfiguring(DbContextOptionsBuilder options)
-{
-    options.UseSqlite(Configuration.GetConnectionString("DefaultConnection"),
-         x => x.MigrationsAssembly("Onyx.Infrastructure"));
-}
+//Entity Framework Db Context
+builder.Services.AddDbContext<OnyxDbContext>(options =>
+    options.UseSqlite(builder.Configuration?.GetConnectionString("DefaultConnection"), x => x.MigrationsAssembly("Onyx.Infrastructure"))
+);
 ```
 
 Il faudra alors taper cette commande : ``` dotnet ef migrations add InitialCreate --project ../Onyx.Infrastructure ``` 

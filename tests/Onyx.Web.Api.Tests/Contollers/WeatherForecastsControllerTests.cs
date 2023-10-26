@@ -1,21 +1,18 @@
 ﻿namespace Onyx.Web.Api.Tests.Contollers
 {
-    public class WeatherForecastsControllerTests : IClassFixture<WebApplicationFactory<Program>>
+    public class WeatherForecastsControllerTests : IClassFixture<AppTestFixture>
     {
+        private readonly HttpClient _httpClient;
         private const string baseEndPoint = "/api/weatherforecasts";
 
-        private readonly WebApplicationFactory<Program> _factory;
-
-        public WeatherForecastsControllerTests(WebApplicationFactory<Program> factory)
+        public WeatherForecastsControllerTests(AppTestFixture fixture)
         {
-            _factory = factory;
+            _httpClient = fixture.CreateClient();
         }
 
         [Fact]
         public async Task GetAllWeatherForecasts_ShouldReturn_Ok()
         {
-            using var _httpClient = _factory.CreateClient();
-
             //Arrange
             var expectedStatusCode = System.Net.HttpStatusCode.OK;
 
