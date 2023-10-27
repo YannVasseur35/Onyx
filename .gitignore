@@ -366,5 +366,5 @@ FodyWeavers.xsd
 #############
 # YANN
 
-.report/
-coverage.xml
+#.report/
+#coverage.xml
