@@ -66,7 +66,9 @@ Ces classes sont générées par dotnet ef (entity framework) et n'ont pour but 
 
 Toujours est il que cela reste intéressant. Par exemple la classe non testé (score à 0%) Onyx.Application.Extensions.Mapping n'est plus à tester car elle est obsolete (remplacé par automapper). C'est donc un moyen de faire le ménage dans le code. 
 
-En cliquant sur un lien cela nous ouvre le détail d'une classe et nous affiche en rouge le code non testé. Exemple avec NotificationsAppServices
+Quel score de code coverage doit on atteindre ? 100% semble illusoire si on test tout. On serait tenter d'écrire des tests uniquement pour "scorer". Mieux vaut un bon test que 10 foireux. Pour répondre à cette question, je vous propose une réponse de "grand maitre" proposé par Alberto Savoia : https://stackoverflow.com/questions/90002/what-is-a-reasonable-code-coverage-for-unit-tests-and-why
+
+En cliquant sur un lien du rapport, cela nous ouvre le détail d'une classe et nous affiche en rouge le code non testé. Exemple avec NotificationsAppServices
 
 ![](../images/CoverageNotificationsAppServices.png)
 
