@@ -1,4 +1,4 @@
-# Step 9 : Finalisation de la chaine
+# Step 9 : Finalisation de la chaine de données
 
 On vient de mettre en place notre ORM, il nous manque pas grand chose pour terminer notre chaine d'information de la base de donnée vers l'API
 
@@ -141,6 +141,34 @@ public class AppTestFixture : WebApplicationFactory<Program>
             services.AddDbContext<OnyxDbContext>(options =>
                 options.UseInMemoryDatabase("TestDB"));
         });
+    }
+}
+```
+
+Il reste plus qu'a l'injecter dans notre test. L'avantage c'est qu'on va pouvoir l'utiliser pour l'ensemble de nos tests.
+
+```C#
+public class WeatherForecastsControllerTests : IClassFixture<AppTestFixture>
+{
+    private readonly HttpClient _httpClient;
+    private const string baseEndPoint = "/api/weatherforecasts";
+
+    public WeatherForecastsControllerTests(AppTestFixture fixture)
+    {
+        _httpClient = fixture.CreateClient();
+    }
+
+    [Fact]
+    public async Task GetAllWeatherForecasts_ShouldReturn_Ok()
+    {
+        //Arrange
+        var expectedStatusCode = System.Net.HttpStatusCode.OK;
+
+        //Act
+        var response = await _httpClient.GetAsync($"{baseEndPoint}");
+
+        //Assert
+        Assert.Equal(expectedStatusCode, response.StatusCode);
     }
 }
 ```

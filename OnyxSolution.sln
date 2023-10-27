@@ -44,6 +44,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{E18D621F-08F0-4C7F-A735-832E6AD32B2B}"
 	ProjectSection(SolutionItems) = preProject
 		docs\images\appservice.jpg = docs\images\appservice.jpg
+		docs\images\CoverageNotificationsAppServices.png = docs\images\CoverageNotificationsAppServices.png
+		docs\images\coverletreport.png = docs\images\coverletreport.png
 		docs\images\dotnet-onion-ddd-cqrs-es.jpg = docs\images\dotnet-onion-ddd-cqrs-es.jpg
 		docs\images\EF-Migration.png = docs\images\EF-Migration.png
 		docs\images\onion-arch1.png = docs\images\onion-arch1.png

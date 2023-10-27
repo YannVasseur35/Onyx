@@ -362,3 +362,9 @@ MigrationBackup/
 FodyWeavers.xsd
 .angular/
 /.env
+
+#############
+# YANN
+
+.report/
+coverage.xml
