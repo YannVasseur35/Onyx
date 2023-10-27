@@ -1,4 +1,4 @@
-# Step 8 : Entity Framework
+# Step 8 : Entity Framework & Migrations
 
 Note : EF Core 8 sort d'ici quelques jour. Il est probable qu'il faille revoir ce qui suit. 
 
