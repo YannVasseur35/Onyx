@@ -1,10 +1,4 @@
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
-using Onyx.Core.Interfaces;
-using Onyx.Infrastructure.Datas;
-using Onyx.Infrastructure.Services;
+/**************************************/
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -13,7 +7,8 @@ builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 //Entity Framework Db Context
 builder.Services.AddDbContext<OnyxDbContext>(options =>
-    options.UseSqlite(builder.Configuration?.GetConnectionString("DefaultConnection"), x => x.MigrationsAssembly("Onyx.Infrastructure"))
+    options.UseSqlite(builder.Configuration?.GetConnectionString("DefaultConnection"),
+    x => x.MigrationsAssembly("Onyx.Infrastructure"))
 );
 
 // Add services to the container.

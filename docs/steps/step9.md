@@ -61,22 +61,24 @@ Pour faire simple, tout est Scoped, sauf si c'est nécessaire d'avoir un Singlet
 
 Maintenant l'application tourne !
 
-## Tests
+## Tests d'infrastructure
 
 Mais on a tout pété nos tests... 
 
 On a modifié le constructeur de WeatherForecastDataServices, du coup notre test est cassé. 
 
-Dans ce test Onyx.Infrastructure.Tests on a besoin d'une base de données et d'un context EF. Pas bien pratique me direz vous. 
+Dans ce test Onyx.Infrastructure.Tests on a besoin d'une base de données et d'un context EF. Pas bien pratique me direz vous pour des tests auto. 
 
 Il existe un package Microsoft.EntityFrameworkCore.InMemory qui permet de mettre une base de donnée en mémoire. Ceci va s'avérer très pratique, car à l'avenir, ces tests devront tourner via des pipeplines sur Azure Devops. Autant ne pas s'embêter à monter un environnement complet de test avec base de données si c'est possible.
 
-On va donc créer notre propre context de données en mémoire.
+On va donc créer notre propre context de données en mémoire. 
+
+On a besoin aussi d'un mapper qu'on va initialiser dans le constructeur.
 
 ```C#
 public class WeatherForecastDataServicesTests
 {
-    private readonly Mock<IMapper> _mapper;
+    private readonly IMapper _mapper;
 
     private DbContextOptions<OnyxDbContext> CreateNewContextOptions()
     {
@@ -87,44 +89,61 @@ public class WeatherForecastDataServicesTests
 
     public WeatherForecastDataServicesTests()
     {
-        _mapper = new Mock<IMapper>();
+        var config = new MapperConfiguration(c => {               
+            c.AddProfile<Mappings.MappingProfiles>();
+        });
+
+        _mapper = config.CreateMapper();             
     }
 
     [Fact]
-    public async Task GetAllWeatherForecasts_ShouldReturn_NoNull()
+    public async Task GetAllWeatherForecasts_ShouldReturn_Data()
     {
         //Arrange
         using (var context = new OnyxDbContext(CreateNewContextOptions()))
         {
-            context.Add(new WeatherForecastEntity { City = "Rennes", TemperatureC = 24 });
+            context.WeatherForecasts.Add(new WeatherForecastEntity { City = "Rennes", TemperatureC = 24 });
             context.SaveChanges();
-        }
 
-        ///Act and Assert
-        using (var context = new OnyxDbContext(CreateNewContextOptions()))
-        {
-            var weatherForecastDataServices = new WeatherForecastDataServices(context, _mapper.Object);
+            var weatherForecastDataServices = new WeatherForecastDataServices(context, _mapper);
             var results = await weatherForecastDataServices.GetAllAsync();
 
             Assert.NotNull(results);
             Assert.True(results.Count() > 0);
+            Assert.True(results.FirstOrDefault()?.City == "Rennes");
+            Assert.True(results.FirstOrDefault()?.TemperatureC == 24);
         }
     }
+}
+```
+## Tests de la web API
+
+Le test de l'API foire. Maintenant qu'on a implémenter toute la chaine, et que le test lance le Program.cs en mémoire qui lui a besoin d'une base de données, ca plante
+
+```
+Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 14: 'unable to open database file'.
 ```
 
+On va donc configurer un nouveau Context via une IClassFixture. On commence par enlever le contexte présent (celui avec un fichier) et on rajoute le notre en mémoire.
 
+```C#
+public class AppTestFixture : WebApplicationFactory<Program>
+{
+    protected override void ConfigureWebHost(IWebHostBuilder builder)
+    {
+        builder.ConfigureTestServices(services =>
+        {
+            // remove the existing context configuration
+            var descriptor = services.SingleOrDefault(d => d.ServiceType == typeof(DbContextOptions<OnyxDbContext>));
+            if (descriptor != null)
+                services.Remove(descriptor);
 
+            services.AddDbContext<OnyxDbContext>(options =>
+                options.UseInMemoryDatabase("TestDB"));
+        });
+    }
+}
+```
 
-
-TODO
-
-
---> Revoir OnyxDbContext dans les steps précédentes
-
-et Program.cs
-
-builder.Services.AddDbContext<OnyxDbContext>(options =>
-    options.UseSqlite(builder.Configuration?.GetConnectionString("DefaultConnection"), x => x.MigrationsAssembly("Onyx.Infrastructure"))
-);
 
 

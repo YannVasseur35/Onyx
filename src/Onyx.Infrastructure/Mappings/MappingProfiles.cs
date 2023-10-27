@@ -8,6 +8,8 @@ namespace Onyx.Infrastructure.Mappings
         public MappingProfiles()
         {
             CreateMap<WeatherForecast, WeatherForecastEntity>()
+                .ForMember(dest => dest.Id, opt => opt.Ignore())
+                .ForMember(dest => dest.Humidity, opt => opt.Ignore())
                 .ForMember(dest => dest.Latitude, opt => opt.MapFrom(src => src.Coordinates.Latitude))
                 .ForMember(dest => dest.Longitude, opt => opt.MapFrom(src => src.Coordinates.Longitude));
 

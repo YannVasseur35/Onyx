@@ -16,7 +16,7 @@ namespace Onyx.Infrastructure.Services
 
         public async Task<IEnumerable<WeatherForecast>?> GetAllAsync()
         {
-            return _context.WeatherForecasts.Select(x => _mapper.Map<WeatherForecast>(x));
+            return await Task.FromResult(_context.WeatherForecasts.Select(x => _mapper.Map<WeatherForecast>(x)));
         }
 
         public Task<WeatherForecast?> GetAsync(string id)

@@ -11,7 +11,7 @@ namespace Onyx.Infrastructure.Tests
 {
     public class WeatherForecastDataServicesTests
     {
-        private readonly Mock<IMapper> _mapper;
+        private readonly IMapper _mapper;
 
         private DbContextOptions<OnyxDbContext> CreateNewContextOptions()
         {
@@ -22,27 +22,30 @@ namespace Onyx.Infrastructure.Tests
 
         public WeatherForecastDataServicesTests()
         {
-            _mapper = new Mock<IMapper>();
+            var config = new MapperConfiguration(c =>
+            {
+                c.AddProfile<Mappings.MappingProfiles>();
+            });
+
+            _mapper = config.CreateMapper();
         }
 
         [Fact]
-        public async Task GetAllWeatherForecasts_ShouldReturn_NoNull()
+        public async Task GetAllWeatherForecasts_ShouldReturn_Data()
         {
             //Arrange
             using (var context = new OnyxDbContext(CreateNewContextOptions()))
             {
-                context.Add(new WeatherForecastEntity { City = "Rennes", TemperatureC = 24 });
+                context.WeatherForecasts.Add(new WeatherForecastEntity { City = "Rennes", TemperatureC = 24 });
                 context.SaveChanges();
-            }
 
-            ///Act and Assert
-            using (var context = new OnyxDbContext(CreateNewContextOptions()))
-            {
-                var weatherForecastDataServices = new WeatherForecastDataServices(context, _mapper.Object);
+                var weatherForecastDataServices = new WeatherForecastDataServices(context, _mapper);
                 var results = await weatherForecastDataServices.GetAllAsync();
 
                 Assert.NotNull(results);
                 Assert.True(results.Count() > 0);
+                Assert.True(results.FirstOrDefault()?.City == "Rennes");
+                Assert.True(results.FirstOrDefault()?.TemperatureC == 24);
             }
         }
     }
