@@ -1,4 +1,4 @@
-# Step 9 : Finalisation de la chaine
+# Step 9 : Finalisation de la chaine de données
 
 On vient de mettre en place notre ORM, il nous manque pas grand chose pour terminer notre chaine d'information de la base de donnée vers l'API
 
@@ -22,13 +22,13 @@ public async Task<IEnumerable<WeatherForecast>?> GetAllAsync()
 }
 ```
 
-De la meme manière que le mapping dans Onyx.Application vu précédement, on va rajouter un mapping entre un objet Core (Domain) et un objet Entity (DAO)
+De la meme manière que le mapping dans Onyx.Application vu précédement, on va rajouter un mapping entre un objet Core (Domain) et un objet Entity.
 
-AutoMapper va detecter ce nouveau profil et le gérer.
+AutoMapper va detecter ce nouveau profil et le gérer tout seul.
 
 ## Erreur
 
-Si on compile ça va. Mais à l'execution je vais avoir cette erreur :
+La compilation passe. Mais à l'execution je vais avoir cette erreur :
 
 ```
 System.AggregateException : 'Some services are not able to be constructed (Error while validating the service descriptor 'ServiceType: Onyx.Application.Interfaces.IWeatherForecastAppServices Lifetime: Singleton ImplementationType: Onyx.Application.Services.WeatherForecastAppServices': Cannot consume scoped service 'Onyx.Infrastructure.Datas.OnyxDbContext' from singleton 
@@ -61,7 +61,7 @@ Pour faire simple, tout est Scoped, sauf si c'est nécessaire d'avoir un Singlet
 
 Maintenant l'application tourne !
 
-## Tests d'infrastructure
+## Tests d'Onyx.Infrastructure
 
 Mais on a tout pété nos tests... 
 
@@ -72,7 +72,6 @@ Dans ce test Onyx.Infrastructure.Tests on a besoin d'une base de données et d'u
 Il existe un package Microsoft.EntityFrameworkCore.InMemory qui permet de mettre une base de donnée en mémoire. Ceci va s'avérer très pratique, car à l'avenir, ces tests devront tourner via des pipeplines sur Azure Devops. Autant ne pas s'embêter à monter un environnement complet de test avec base de données si c'est possible.
 
 On va donc créer notre propre context de données en mémoire. 
-
 On a besoin aussi d'un mapper qu'on va initialiser dans le constructeur.
 
 ```C#
@@ -98,16 +97,18 @@ public class WeatherForecastDataServicesTests
 
     [Fact]
     public async Task GetAllWeatherForecasts_ShouldReturn_Data()
-    {
-        //Arrange
+    {        
         using (var context = new OnyxDbContext(CreateNewContextOptions()))
         {
+            //Arrange
             context.WeatherForecasts.Add(new WeatherForecastEntity { City = "Rennes", TemperatureC = 24 });
             context.SaveChanges();
-
             var weatherForecastDataServices = new WeatherForecastDataServices(context, _mapper);
+            
+            //Act
             var results = await weatherForecastDataServices.GetAllAsync();
 
+            //Assert
             Assert.NotNull(results);
             Assert.True(results.Count() > 0);
             Assert.True(results.FirstOrDefault()?.City == "Rennes");
@@ -116,9 +117,9 @@ public class WeatherForecastDataServicesTests
     }
 }
 ```
-## Tests de la web API
+## Tests de la Web API
 
-Le test de l'API foire. Maintenant qu'on a implémenter toute la chaine, et que le test lance le Program.cs en mémoire qui lui a besoin d'une base de données, ca plante
+Le test de l'API foire. Maintenant qu'on a implémenté toute la chaine, le test lance le Program.cs en mémoire qui lui a besoin d'une base de données qui n'existe pas. 
 
 ```
 Microsoft.Data.Sqlite.SqliteException (0x80004005): SQLite Error 14: 'unable to open database file'.
@@ -144,6 +145,42 @@ public class AppTestFixture : WebApplicationFactory<Program>
     }
 }
 ```
+
+Il reste plus qu'a l'injecter dans notre test. L'avantage c'est qu'on va pouvoir l'utiliser pour l'ensemble de nos tests.
+
+```C#
+public class WeatherForecastsControllerTests : IClassFixture<AppTestFixture>
+{
+    private readonly HttpClient _httpClient;
+    private const string baseEndPoint = "/api/weatherforecasts";
+
+    public WeatherForecastsControllerTests(AppTestFixture fixture)
+    {
+        _httpClient = fixture.CreateClient();
+    }
+
+    [Fact]
+    public async Task GetAllWeatherForecasts_ShouldReturn_Ok()
+    {
+        //Arrange
+        var expectedStatusCode = System.Net.HttpStatusCode.OK;
+
+        //Act
+        var response = await _httpClient.GetAsync($"{baseEndPoint}");
+
+        //Assert
+        Assert.Equal(expectedStatusCode, response.StatusCode);
+    }
+}
+```
+
+
+## Conclusion
+
+On vient de boucler la boucle. De la requête Web API, on lance une méthode du service applicatif, qui va lancer un service Data, qui lui va récupérer via EF Core une donnée en base, puis refaire tout le chemin inverse pour fournir une réponse au client web. 
+
+Pour chaque couche on a un ou des tests unitaires. Ces tests unitaires permettent d'isoler le composant testé via des moq et de l'injection de dépendance simulée, ce qui concentre le test sur ce que doit faire la fonctionalité, sans dépendre de composant externe. 
+
 
 
 

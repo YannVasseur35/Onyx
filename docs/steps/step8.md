@@ -1,14 +1,14 @@
-# Step 8 : Entity Framework
+# Step 8 : Entity Framework & Migrations
 
-Note : EF Core 8 sort d'ici quelques jour. Il est probable qu'il faille revoir ce qui suit. 
+Note : à l'heure ou j'écris, EF Core 8 sort d'ici quelques jours, on utilisera donc ici d'EF Core 7. 
 
-Je parlerai d'entity framework CORE ici, même si parfois j'oublie le terme "Core". "Core" C'est pour le différencier de EF lié au .net Framework 4.6. (Microsoft nous perds avec ces noms, car le terme Core est abandonnée depuis .net6). 
+Je parlerai d'entity framework CORE, même si parfois j'oublie le terme "Core". "Core" C'est pour le différencier de EF lié au .net Framework 4.6. (Microsoft nous perds avec ces noms, car le terme Core est abandonnée depuis .net6). 
 
-Nous allons utiliser Entity Framework Core(EF). Pour cela on a deux choix
+Nous allons utiliser Entity Framework Core(EF). Pour cela on a deux approches :
 - Code First 
 - Database First
 
-Database First est utile lorsque la base de données existe déjà et qu'on a pas prévu d'y toucher. Dans ce cas le modèle de données sera calqué sur celle ci. 
+Database First est utile lorsque la base de données existe déjà et que l'on n'a pas prévu d'y toucher. Dans ce cas le modèle de données sera calqué sur celle ci. 
 
 Code First permet de ne pas gérer la base de données manuellement, mais de le faire avec le code, avec ce qu'on appelle des "migrations". 
 
@@ -48,7 +48,7 @@ public class WeatherForecastEntity
 }
 ```
 
-On a quasiment le même objet, ce qui le différencie c'est l'Id. Par défaut, c'est la clé primaire de l'objet en base de données. (Ca pouvait aussi être WeatherForecastEntityId). On peut aussi rajouter l'attribut [Key] Source : https://learn.microsoft.com/en-us/ef/core/modeling/keys?tabs=data-annotations
+On a quasiment le même objet, ce qui le différencie c'est l'Id. Par défaut, c'est la clé primaire de l'objet en base de données. (Ca pouvait aussi être WeatherForecastEntityId). On peut aussi rajouter l'attribut [Key], https://learn.microsoft.com/en-us/ef/core/modeling/keys?tabs=data-annotations
 
 
 ### DB Context
@@ -82,7 +82,7 @@ builder.Services.AddDbContext<OnyxDbContext>(options =>
 ### DB Init
 
 On va créer une classe static qui va faire deux choses :
-- appliquer toutes les migrations pour s'assurer que base de données est à jour par rapport à notre code
+- appliquer toutes les migrations pour s'assurer que la base de données est à jour par rapport à notre code
 - ajouter du contenu, quelques données pour démarrer (pratique au début d'un projet)
 
 Un article intéressant https://jasontaylor.dev/ef-core-database-initialisation-strategies/ discute des approches que l'on peut avoir avec cette gestion des données, suivant l'avancé de notre projet. 
@@ -172,11 +172,11 @@ dotnet ef migrations add InitialCreate
 ```
 
 
-Cette commande créer un repertoire "Migrations" à la racine du projet. Celui ci va contenir, à terme, une liste de classe qui décrivent tous les changements opéré sur le modele de données (Nos Entities) et les appliquer dans la base de donnée. Par exemple, renommer une propriété dans un objet Entity se traduira par le renommage d'une colone d'une table en base de données. Tous est automatiquement géré ici. Dans le code lorsque l'on appelle ``` context.Database.Migrate(); ```, il va executer tout ce qui se trouve dans ce dossier. A ne surtout pas modifier manuellement si on ne sait pas ce qu'on fait. 
+Cette commande créer un repertoire "Migrations" à la racine du projet. Celui ci va contenir, à terme, une liste de classe qui décrivent tous les changements opéré sur le modele de données (Nos Entities) et les appliquer dans la base de données. Par exemple, renommer une propriété dans un objet Entity se traduira par le renommage d'une colonne d'une table en base de données. Tous est automatiquement géré ici. Dans le code lorsque l'on appelle ``` context.Database.Migrate(); ```, il va executer tout ce qui se trouve dans ce dossier. A ne surtout pas modifier manuellement si on ne sait pas ce qu'on fait. 
 
-Le soucis ici, c'est que notre projet de démarrage qui contient Program.cs n'est pas le projet de destination de ce dossier Migration. 
+Le souci ici, c'est que notre projet de démarrage qui contient Program.cs n'est pas le projet de destination de ce dossier Migration, qui devrait se situer logiquement dans Onyx.Infrascture.
 
-Pour cela on va le préciser a la configuration du DbContext
+Pour cela on va le préciser à la configuration du DbContext
 
 ```c#
 //Entity Framework Db Context
@@ -191,9 +191,9 @@ Pour que le dossier Migrations apparaisse enfin ! Source https://learn.microsoft
 
 ### First Run
 
-Lancer l'application Onyx.Web.Api. Normalement vous allez voir de nouveaux fichiers dans le repertoire du fichier de setting (Onyx.Infrastructure/Datas/DB) dont un fichier .db qui est la base de donnée. Ouvrez le avec DB Browser for SQLite https://sqlitebrowser.org/ et vous verrez vos données.
+Lancer l'application Onyx.Web.Api. Normalement vous allez voir de nouveaux fichiers (selon le path du fichier de setting (Onyx.Infrastructure/Datas/DB) dont un fichier .db qui est la base de données. Ouvrez le avec DB Browser for SQLite https://sqlitebrowser.org/ et vous verrez vos données.
 
-Note : j'ai rajouté un fichier .gitignore qui ignore le dossier /Datas/DB. C'est en effet pas nécessaire de remonter ça au dépot git. 
+Note : j'ai rajouté un fichier .gitignore qui ignore le dossier /Datas/DB. Ce n'est pas nécessaire de remonter ça au dépot git. 
 
 Faite un petit test, arrêter le run. Supprimer le contenu du dossier Datas/DB/ et relancer l'app. Tout redevient comme avant ! 
 
@@ -201,7 +201,7 @@ Très pratique pour développer dans son coin, avec sa propre base de données.
 
 ### La suite
 
-Vos entities vont évoluer. Vous allez en créer d'autre, les modifiers, les supprimer. Une vie de développeur somme toute classique. 
+Vos entities vont évoluer. Vous allez en créer d'autre, les modifier, les supprimer. Une vie de développeur somme toute classique. 
 
 Prenons un exemple. On va rajouter une propriété ``` public decimal Humidity { get; set; }``` à notre objet WeatherForecastEntity
 
@@ -235,7 +235,7 @@ public partial class Migration1 : Migration
 }
 ```
 
-Vous avez la possibilité de lancer la commande ``` dotnet ef database update ``` pour mettre la table à jour manuellement. (ou lancer votre app)
+Vous avez la possibilité de lancer la commande ``` dotnet ef database update ``` pour mettre la table à jour manuellement, ou lancer l'application Web Api qui dispose à son lancement d'une commande qui le fait tout seul !
 
 La base de donnée possède une table pour géré les migrations
 
@@ -247,14 +247,14 @@ Ce qui permet d'éviter de les re-jouer.
 
 Cette stratégie permet de développer efficacement. On ne touche pas à la base de données, sauf éventuellement en lecture pour débuger.
 
-La base de données peut être supprimé entierement puis reconstruite entièrement avec une suite de migration. 
+La base de données peut être supprimée entièrement puis reconstruite entièrement avec une suite de migration. 
 
 On a un la possibilité de l'alimenter au démarrage ce qui permet d'avoir un jeu de données pratique pour développer rapidement. 
 
-De plus, les migrations sont automatiquement joué au run, donc les différents environnement comme le staging et la production auront aussi automatiquement ces mises à jour. 
+De plus, les migrations sont automatiquement joué au run, donc les différents environnements comme le staging et la production auront aussi automatiquement ces mises à jour. 
 
 Le jour où on souhaite changer de SGBD, on a "que" (en théorie ;) ) à changer qq lignes dans les settings et le Program.cs, sans toucher une ligne de code. 
 
-La seule chose qu'on a à faire en tant que développeur, c'est penser à construire régulièrement nos migrations. 
+La seule chose qu'on a à faire en tant que développeur, c'est de penser à construire régulièrement nos migrations. 
 
 J'aime beaucoup cette façon de travailler. 
