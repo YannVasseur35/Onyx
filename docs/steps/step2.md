@@ -11,7 +11,7 @@ Pour commencer on va créer un objet DTO pour 'Data Transfert Object'. Comme son
 Pourquoi créer un objet spécial ? 
 La principale raison est d'envoyer que le strict nécessaire. Vous n'avez pas besoin d'envoyer des données inutiles ou compromettantes (id, password, clé...). Il faut créer un objet sur mesure qui répond au besoin, point. 
 
-Dans un projet monolith ou legacy, on a tendance à utiliser un objet du domain (métier) voir même un objet d'accès aux données (data object) qui lui expose d'autres données comme des cléfs étrangères, des dates et que sais-je encore. 
+Dans un projet monolith ou legacy, on avait tendance à utiliser un objet du domain (métier) voir même un objet d'accès aux données (data object) qui lui expose d'autres données comme des cléfs étrangères, des dates et que sais-je encore. 
 
 Il faudra à un moment faire correspondre les données entre ces objets (data - domain - dto) et pour cela on va les "mapper", soit à la main (non recommandé) soit via une lib externe comme AutoMapper. Ce sujet sera aborder plus tard.
 
