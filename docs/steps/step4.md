@@ -1,16 +1,16 @@
 # Step 4 : Application Service
 
- Dans les étapes précedentes, nous avons mis en place un endpoint et nous avons créer un projet test sur ce endpoint.
+ Dans les Ã©tapes prÃ©cedentes, nous avons mis en place un endpoint et nous avons crÃ©er un projet test sur ce endpoint.
 
- La suite consiste à mettre en place la couche application de l'architecture en oignon vu à l'étape 1.
+ La suite consiste Ã  mettre en place la couche application de l'architecture en oignon vu Ã  l'Ã©tape 1.
 
- Celle ci va se charger de donner les datas aux couches de présentations, que ce soit notre Api Web ou un site Web directement. On pourrait aussi envisager un client WPF ou une application Xamarin qui utilise cette couche. 
+ Celle ci va se charger de donner les datas aux couches de prÃ©sentations, que ce soit notre Api Web, un site Web ou une application mobile/desktop. 
 
- Nous allons créer un service **WeatherForecastServices** qui implémente l'interface **IWeatherForecastServices**. 
+ Nous allons crÃ©er un service **WeatherForecastServices** qui implÃ©mente l'interface **IWeatherForecastServices**. 
 
-## Implémentation
+## ImplÃ©mentation
 
-Revoyons notre controller pourqu'il utilise un service de la couche d'application, qu'on fournir avec de l'injection de dépendance dans le constructeur du controleur.
+Revoyons notre controller pourqu'il utilise le service de la couche d'application, qu'on fournir avec de l'injection de dÃ©pendance dans le constructeur du controleur.
 
  ```c#
  public sealed class WeatherForecastsController : ControllerBase
@@ -40,7 +40,7 @@ Revoyons notre controller pourqu'il utilise un service de la couche d'applicatio
     }
  ```
 
- Et son implémentation : 
+ Et son implÃ©mentation : 
 
  ```c#
     public class WeatherForecastAppServices : IWeatherForecastAppServices
@@ -66,15 +66,15 @@ Revoyons notre controller pourqu'il utilise un service de la couche d'applicatio
     }
 ```
 
- En fait, je n'ai fait que déplacer le précédent code du controller vers un service applicatif. Pour le moment les données sont toujours "mockées".
+ En fait, je n'ai fait que dÃ©placer le prÃ©cÃ©dent code du controller vers un service applicatif. Pour le moment les donnÃ©es sont toujours "mockÃ©es".
 
- Si vous executez l'api (ou lancer les tests de l'api) cela va échouer. :heavy_multiplication_x:
+ Si vous executez l'api (ou lancer les tests de l'api) cela va Ã©chouer. :heavy_multiplication_x:
 
 ```
  System.InvalidOperationException: Unable to resolve service for type 'Onyx.Application.Interfaces.IWeatherForecastAppServices' while attempting to activate 'Onyx.Web.Api.Controllers.WeatherForecastsController'.
 ```
 
-Le service qui s'occupe de résoudre les dépendances injectées ne trouve pas d'instance correspondant à IWeatherForecastAppServices, il faut donc lui indiquer quels services sont nécessaires, dans Program.cs de l'Api Web :
+Traduction : le service qui s'occupe de rÃ©soudre les dÃ©pendances injectÃ©es ne trouve pas d'instance correspondant Ã  IWeatherForecastAppServices, il faut donc lui indiquer quels services sont nÃ©cessaires, dans Program.cs de l'Api Web :
 
 ```c#
 // Add services to the container.
@@ -82,13 +82,13 @@ builder.Services.AddSingleton<INotificationsAppServices, NotificationsAppService
 builder.Services.AddSingleton<IWeatherForecastAppServices, WeatherForecastAppServices>();
 ```
 
-INotificationsAppServices va être discuté plus tard.
+INotificationsAppServices va Ãªtre discutÃ© plus tard. (et le mode Singleton aussi)
 
 ## Tests
 
 On va pouvoir ajouter un test dans le projet correspondant Onyx.Application.Tests.
 
-Que test-on ? Le service applicatif est sensé nous fournir des données ou fournir quelconques services. On ne teste pas ces données ci mais le fait qu'on en a, que l'opération s'est bien déroulée avec toutes les sous-opérations attendues.
+Que test-on ? Le service applicatif est sensÃ© nous fournir des donnÃ©es ou fournir quelconques services. On ne teste pas ces donnÃ©es ci mais le fait qu'on en ait, que l'opÃ©ration s'est bien dÃ©roulÃ©e avec toutes les sous-opÃ©rations attendues.
 
 ```c#
  public class WeatherForecastAppServicesTests
@@ -114,11 +114,11 @@ Que test-on ? Le service applicatif est sensé nous fournir des données ou fourni
 }
 ```
 
-Pour le moment c'est très léger comme test, voir presque inutile. On estime juste qu'il doit y avoir des données en retour (non null).
+Pour le moment c'est trÃ©s lÃ©ger comme test, voir presque inutile. On estime juste qu'il doit y avoir des donnÃ©es en retour (non null).
 
-## Nouveau Service : creation d'un bulletin météo
+## Nouveau Service : creation d'un bulletin mÃ©tÃ©o
 
-Envisagons un système de notification qui alerte des gelées pour les maraîcher par exemple. On va tester si la création d'une nouvelle donnée "WeatherForecast" lève une notification quelque part dans le code. On va appeler le service _notificationsAppService:
+Envisagons un systÃ¨me de notification qui alerte des gelÃ©es pour les maraÃ®cher par exemple. On va tester si la crÃ©ation d'une nouvelle donnÃ©e "WeatherForecast" lÃ¨ve une notification quelque part dans le code. On va appeler le service  notificationsAppService:
 
 ```c#
 public async Task<Operation> CreateWeatherForecasts(WeatherForecastDto weatherForecastDto)
@@ -134,11 +134,11 @@ public async Task<Operation> CreateWeatherForecasts(WeatherForecastDto weatherFo
 }
 ```
 
-Remarquez que pour le moment on ne s'occupe pas de la création de l'objet. On verra cela plus tard.
+Remarquez que pour le moment on ne s'occupe pas de la crÃ©ation de l'objet. On verra cela plus tard.
 
-Le service renvoit un objet "Operation" qui devra dans la majorité des cas indiquée que l'opération s'est bien déroulée. Dans le cas contraire, on remplira cet objet d'information pour faciliter la maintenance avec  consomateur de ce service. 
+Le service renvoit un objet "Operation" qui devra dans la majoritÃ© des cas indiquÃ©e que l'opÃ©ration s'est bien dÃ©roulÃ©e. Dans le cas contraire, on remplira cet objet d'information pour faciliter la maintenance avec le consomateur de ce service. 
 
-Notez qu'on a introduit un nouveau service NotificationsAppServices passé dans le constructeur de WeatherForecastAppServices
+Notez qu'on a introduit un nouveau service NotificationsAppServices passÃ© dans le constructeur de WeatherForecastAppServices
 
 ```c#
 private readonly INotificationsAppServices _notificationsAppService;
@@ -149,14 +149,18 @@ public WeatherForecastAppServices(INotificationsAppServices notificationsAppServ
 }
 ```
 
-Ceci apporte un problème dans nos tests, lors de la création de l'instance dans nos tests. Il nous faut en créer une. 
+Ceci apporte un problÃ me dans nos tests, lors de la crÃ©ation de l'instance dans nos tests. Il nous faut en crÃ©er une. 
 
-Or nous ne voulons pas tester "NotificationsAppServices", nous souhaitons le simuler. Pour cela on peut utiliser un outil comme Moq.
+Or dans le test nous ne voulons pas tester "NotificationsAppServices", nous souhaitons le simuler. Pour cela on peut utiliser un outil comme Moq.
 
 ## Moq
 
+Moq est une librairie qui permet de simuler des dÃ©pendances externes. Elle doit avoir plein d'autre fonctionnalitÃ©s mais personnellement je ne l'utilise que pour cela. (je suis pas un expert de cette lib)
+
 https://github.com/devlooped/moq
 https://github.com/devlooped/moq/wiki/Quickstart
+
+Par ailleurs, on peut rencontrer tous ces termes Mock, Stub, Dummy, Fake et j'en passe. Personnelement je trouve qu'on rend pas les choses plus simple avec plus de vocabulaire pour dire Ã  peu prÃªt la mÃªme chose. Si vous savez la diffÃ©rence, tant mieux pour vous. Pour moi tout Ã§a veut plus ou moins dire la mÃªme chose. J'utiliserai le terme Mock pour la suite. 
 
 Voici notre nouveau constructeur de notre classe de test WeatherForecastAppServicesTests : 
 
@@ -171,11 +175,11 @@ public WeatherForecastAppServicesTests()
 }
 ```
 
- new Mock\<INotificationsAppServices>(); va créer un service factice sur lequel on va pouvoir intervenir pour lui demander de faire des actions spéciales, afin d'affiner nos tests sur le service que l'on souhaite vraiment tester : WeatherForecastAppServices
+ new Mock\<INotificationsAppServices>(); va crÃ©er un service factice sur lequel on va pouvoir intervenir pour lui demander de faire des actions spÃ©ciales, afin d'affiner nos tests sur le service que l'on souhaite vraiment tester : WeatherForecastAppServices
 
- C'est le **Unitaire** de test unitaire. On ne test **QUE** une seule chose.
+ C'est le **Unitaire** de test unitaire. On est censÃ© ne tester qu'une seule chose. 
 
- Ici on veut tester le fait que si l'on introduit une température de gel (égale ou inférieure à zéro) on doit avoir une notification qui se déclenche. Voici comment faire avec Moq :
+ Ici on veut tester le fait que si l'on introduit une tempÃ©rature de gel (Ã©gale ou infÃ©rieure Ã  zÃ©ro) on doit avoir une notification qui se dÃ©clenche. Voici comment faire avec Moq :
 
 ```c#
 [Fact]
@@ -194,5 +198,8 @@ public async Task CreateWeatherForecasts_Should_CallNotificationService_WhenFree
 }
 ```
 
-Pour information, j'avais préalablement écrit if (weatherForecastDto.TemperatureC < 0) dans le code du service. Ce test m'a permit de me rendre compte que j'avais oublié le 'égale' qui faisait échouer le test. Comme quoi ça sert. :smile:
+J'ai utilisÃ© une instance MockÃ© avec Moq, mais en realitÃ©, une instance de l'objet WeatherForecastDto aurait suffit. 
+Ce qui serait intÃ©ressant, c'est d'avoir un objet dont les propriÃ©tÃ©s sont remplis alÃ©atoirement. On verra cela plus tard avec AutoFixture https://autofixture.github.io/docs/quick-start/#
+
+Pour information, j'avais prÃ©alablement Ã©crit if (weatherForecastDto.TemperatureC < 0) dans le code du service. Ce test m'a permit de me rendre compte que j'avais oubliÃ© le 'Ã©gale' qui faisait Ã©chouer le test. Comme quoi Ã§a sert les tests ! :smile:
 
