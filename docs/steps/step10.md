@@ -1,8 +1,12 @@
 # Step 10 : Code Coverage
 
+
 *Les tests unitaires permettent de garantir la fonctionnalité et de fournir un moyen de vérification pour les efforts de refactorisation. La couverture du code est une mesure de la quantité de code exécutée par des tests unitaires : lignes, branches ou méthodes. Par exemple, si vous disposez d’une application simple avec seulement deux branches conditionnelles de code (branche a et branche b), un test unitaire qui vérifie qu’une branche conditionnelle a signale la couverture du code de branche de 50 %.*
- 
+
  Source : https://learn.microsoft.com/fr-fr/dotnet/core/testing/unit-testing-code-coverage?tabs=windows
+
+Le code coverage, c'est la couverture de code. Autrement dit, on audit le code source et on détermine quelle partie du code n'est pas couverte pas un test, pour ne déterminer un pourcentage indicatif.
+
  
 ## Outils payants
 
@@ -10,7 +14,6 @@ Si vous avez la version Entreprise de Visual Studio, vous avez toutes les foncti
 https://learn.microsoft.com/en-us/visualstudio/test/using-code-coverage-to-determine-how-much-code-is-being-tested?view=vs-2022&tabs=csharp
 
 Vous pouvez aussi opter pour des outils payants comme Dotcover : https://www.jetbrains.com/dotcover/ des supers outils de JetBrains. 
-
 
 Si vous n'avez pas tout cela, la suite pourrait vous intéresser.
 
@@ -66,7 +69,7 @@ Ces classes sont générées par dotnet ef (entity framework) et n'ont pour but 
 
 Toujours est il que cela reste intéressant. Par exemple la classe non testé (score à 0%) Onyx.Application.Extensions.Mapping n'est plus à tester car elle est obsolete (remplacé par automapper). C'est donc un moyen de faire le ménage dans le code. 
 
-Quel score de code coverage doit on atteindre ? 100% semble illusoire si on test tout. On serait tenter d'écrire des tests uniquement pour "scorer". Mieux vaut un bon test que 10 foireux. Pour répondre à cette question, je vous propose une réponse de "grand maitre" proposé par Alberto Savoia : https://stackoverflow.com/questions/90002/what-is-a-reasonable-code-coverage-for-unit-tests-and-why
+Quel score de code coverage doit on atteindre ? 100% semble illusoire si on teste tout. On serait tenter d'écrire des tests uniquement pour "scorer". Mieux vaut un bon test que 10 foireux. Pour répondre à cette question, je vous propose une réponse de "grand maitre" proposé par Alberto Savoia : https://stackoverflow.com/questions/90002/what-is-a-reasonable-code-coverage-for-unit-tests-and-why
 
 En cliquant sur un lien du rapport, cela nous ouvre le détail d'une classe et nous affiche en rouge le code non testé. Exemple avec NotificationsAppServices
 
@@ -76,7 +79,7 @@ Mais est ce que cela ne serait pas plus pratique d'avoir cela directement dans n
 
 ### Fine Code Coverage
 
-Et merci à Fortune Ngwenya qui mets à disposition cette extension Visual Studio 2022
+Un grand merci à Fortune Ngwenya qui mets à disposition cette extension Visual Studio 2022
 
 https://marketplace.visualstudio.com/items?itemName=FortuneNgwenya.FineCodeCoverage2022
 
@@ -90,6 +93,6 @@ Et les rapports dans un onglet en bas de page :
 
 ![](../images/FineCodeCoverageReports.png)
 
-Elle est pas belle la vie :)
+Elle est pas belle la vie :) 
 
 
