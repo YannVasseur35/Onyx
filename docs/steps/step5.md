@@ -31,14 +31,14 @@ public async Task<IEnumerable<WeatherForecastDto>?> GetAllWeatherForecasts()
 
 On commence à approcher la partie persistance des données, c'est à dire comment on stocke et récupère nos données.
 
-Dans une application monolithe classique, on appelle en général cette couche Data Access Layer ou DAL pour les intimes. Elle s'occupe comme son nom l'indique d'aller chercher en base de donnée, sur un fichier, dans le cloud ou sur une disquette (vous l'avez pas vu venir celle la) des données. 
+Dans une application monolithe à l'ancienne, on appelle en général cette couche Data Access Layer ou DAL pour les intimes. Elle s'occupe comme son nom l'indique d'aller chercher en base de donnée, sur un fichier, dans le cloud ou sur une disquette (vous l'avez pas vu venir celle la) des données. 
 
-Une DAL a un facheux défaut, c'est que la couche Business Layer (BL) du dessus en dépend (BL est l'équivalent de notre Core, avec des dépendances) . Or si on veut respecter la Clean Architecture, le Core ne doit dépendre de RIEN. On va passer par une interface pour isoler ces couches. Ainsi, notre application ne dépendra plus d'une couche de base de données comme c'était le cas avant, mais d'un contrat (interface) qu'on initialisera avec de l'injection de dépendance. 
+Une DAL a un facheux défaut, c'est que la couche Business Layer (BL) du dessus en dépend (BL est l'équivalent de notre Core, avec des dépendances) . Or si on veut respecter la Clean Architecture, **le Core ne doit dépendre de RIEN**. On va passer par une interface pour isoler ces couches. Ainsi, notre application ne dépendra plus d'une couche de base de données comme c'était le cas avant, mais d'un contrat (interface) qu'on initialisera avec de l'injection de dépendance. 
 
 Notre couche persistance de données va se trouver dans notre projet "Infrastructure". Notez que sur l'image ci dessus, la "Persistance" est séparée de l'infratstructure qui elle meme est séparée de la couche présentation. Dans mon projet, j'ai bien une couche présentation séparée (Projet Web.Api). Par contre le reste se trouve dans Infrastructure. 
 
 J'ai volontairement laissé des images d'architecture pas en phase à 100% avec ce projet pour deux raisons :
-- 1 j'ai la fleme d'en refaire
+- 1 j'ai la fleme d'en refaire qui vont ressembler à celles là.
 - 2 ya pas qu'une seule façon de faire, et faut en avoir conscience. Ca permet de se poser des questions.
  
 A ce stade, la seule chose qu'on doit faire c'est répondre à ce besoin de la couche applicative :
@@ -71,9 +71,9 @@ T est le generic de le l'objet que l'on souhaite gérer. Mais est-ce une Entity 
 
 C'est donc un objet extérieur. Est ce un DTO ? Pas recommandé mais je vois pas pourquoi on pourrait pas en avoir un. Pourquoi passer par la couche métier sur un simple "Get" où l'on a pas de logique. Cela éviterait un mapping intermediaire non nécessaire dto -> core -> entity. Ya débat sur ce cas précis, mais...
 
-Et si on a un nouveau projet de présentation WPF. Lui n'aura pas besoin d'un objet Dto mais d'un objet du domaine (Core).
+Si on a un nouveau projet de présentation, WPF par exemple. Lui n'aura pas besoin d'un objet Dto mais d'un objet du domaine (Core).
 
-Donc un Onyx.Core.Models.Domain.WeatherForecast
+Donc un objet du domain Onyx.Core.Models.Domain.WeatherForecast
 
 ### Abstractions 
 
@@ -85,7 +85,7 @@ public interface IWeatherForecastDataServices : IDataService<WeatherForecast>
 }
 ```
 
-Pourquoi faire ceci ? Cela permet d'ajouter d'autre signature de méthode plus tard. Par exemple GetAllFromBzh() qui nous donnera les infos de la région Bretagne uniquement.  
+Pourquoi rajouter une interface ? Cela permet d'ajouter d'autre signature de méthode plus tard. Par exemple GetAllWeatherForeacastInBretagne() qui nous donnera les infos de la région Bretagne uniquement.  
 
 Voici le service qui implémente l'interface IWeatherForecastDataServices
 
@@ -155,7 +155,7 @@ public class WeatherForecastAppServices : IWeatherForecastAppServices
      {
         var weatherForecastList = await _weatherForecastDataServices.GetAllAsync();
 
-        return weatherForecastList.Select(x => new WeatherForecast(x)); //PAS BIEN !
+        return weatherForecastList.Select(x => new WeatherForecast(x)); //PAS BON !
      }
      
      (...)
@@ -180,10 +180,10 @@ public WeatherForecast(WeatherForecastDto dto)
 et ensuite utiliser cette ligne
 
 ```c# 
-return weatherForecastDtoList.Select(x => new WeatherForecast(x));
+return weatherForecastDtoList.Select(x => new WeatherForecast(x)); //PAS BON !
 ```
 
-Mais on doit référencer le projet Application dans le projet Core. C'est une violation de la règle que l'on s'est fixée. Core est indépendante !
+Mais on devrait alors référencer le projet Application dans le projet Core. C'est une violation de la règle que l'on s'est fixée. Core est indépendante !
 
 ### Mapping manuel d'objet : extension
 
@@ -250,10 +250,4 @@ On va en profiter pour créer un nouveau test dans Onyx.Infrastructure.Tests, qu
  }
 ```
 
-
- 
-
-
-
-
- 
+Nos tests sont pas fou fou, on y reviendra.  
