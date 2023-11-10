@@ -70,11 +70,11 @@ git stash
 
 Vous trouverez des informations complémentaires sur différents concept d'architecture ici (en anglais):
 
-- [Main Architecture](docs/ARCHITECTURE.md)
-- [Hexagonal Architecture](docs/HEXAGONAL.md)
-- [DDD](docs/DDD.md)
-- [CQRS AND ES](docs/CQRS-ES.md)
-- [SOLID](docs/SOLID.md)
+- [Main Architecture](docs/en/ARCHITECTURE.md)
+- [Hexagonal Architecture](docs/en/HEXAGONAL.md)
+- [DDD](docs/en/DDD.md)
+- [CQRS AND ES](docs/en/CQRS-ES.md)
+- [SOLID](docs/en/SOLID.md)
 
 Tout est dans le répertoire docs.
 
