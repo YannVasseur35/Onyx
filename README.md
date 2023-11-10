@@ -42,9 +42,9 @@ Ou sinon, vous prenez la branche master qui est la branche la plus complète et 
 - [Step5 : DataService et Tests](docs/steps/step5.md)
 - [Step6 : Mapping et Tests](docs/steps/step6.md)
 - [Step7 : ORM (Entity Framework) et Tests](docs/steps/step7.md)
-- [Step8 : Entity Framework](docs/steps/step7.md)
-- [Step9 : Finalisation de la chaine de données](docs/steps/step7.md)
-- [Step10 : Code Coverage ](docs/steps/step7.md)
+- [Step8 : Entity Framework](docs/steps/step8.md)
+- [Step9 : Finalisation de la chaine de données](docs/steps/step9.md)
+- [Step10 : Code Coverage ](docs/steps/step10.md)
 
 ## Git
 
@@ -70,11 +70,11 @@ git stash
 
 Vous trouverez des informations complémentaires sur différents concept d'architecture ici (en anglais):
 
-- [Main Architecture](docs/ARCHITECTURE.md)
-- [Hexagonal Architecture](docs/HEXAGONAL.md)
-- [DDD](docs/DDD.md)
-- [CQRS AND ES](docs/CQRS-ES.md)
-- [SOLID](docs/SOLID.md)
+- [Main Architecture](docs/en/ARCHITECTURE.md)
+- [Hexagonal Architecture](docs/en/HEXAGONAL.md)
+- [DDD](docs/en/DDD.md)
+- [CQRS AND ES](docs/en/CQRS-ES.md)
+- [SOLID](docs/en/SOLID.md)
 
 Tout est dans le répertoire docs.
 
