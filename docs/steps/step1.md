@@ -26,7 +26,7 @@ Tapez onion architecture dans votre moteur de recherche, section image. Vous all
 
 La seule règle c'est que toute les dépendances de vos projets vont vers le centre (core). Et que le centre (core) ne dépend de rien. C'est très important et c'est ce qui différencie cette achitecture à une architecture classique (Presentation Layer - Business Layer - Data Access Layer) où la couche business a une dépendance à la couche data access. 
 
-Il existe beaucoup d'autre type d'architecture, détailler ici [Archictures](../ARCHITECTURES.md)
+Il existe beaucoup d'autre type d'architecture, détailler ici [Archictures](../fr/Architectures.md)
 ![](../images/achitectures.jpeg)
 
 Dans une architecture oignon, il n'existe pas de dépendance pour la couche centrale. C'est la couche "database" qui a une dépendance à une couche inférieur (core). On utilise alors une interface (définie dans la couche core) implémentée dans la couche database. On obtient ainsi une séparation forte entre la logique metier et son infrastructure. 
