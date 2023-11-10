@@ -32,33 +32,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Onyx.Web.Api.Tests", "tests
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Onyx.Core.Tests", "tests\Onyx.Core.Tests\Onyx.Core.Tests.csproj", "{4125B08E-BFD5-4943-A11E-593CB0B28AFF}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docs", "docs", "{9EC63DC7-1846-4E4A-A61D-28FF7681E6CD}"
-	ProjectSection(SolutionItems) = preProject
-		docs\ARCHITECTURE.md = docs\ARCHITECTURE.md
-		docs\CQRS-ES.md = docs\CQRS-ES.md
-		docs\DDD.md = docs\DDD.md
-		docs\HEXAGONAL.md = docs\HEXAGONAL.md
-		docs\SOLID.md = docs\SOLID.md
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "images", "images", "{E18D621F-08F0-4C7F-A735-832E6AD32B2B}"
-	ProjectSection(SolutionItems) = preProject
-		docs\images\dotnet-onion-ddd-cqrs-es.jpg = docs\images\dotnet-onion-ddd-cqrs-es.jpg
-		docs\images\onion-arch1.png = docs\images\onion-arch1.png
-		docs\images\onion-arch2.jpg = docs\images\onion-arch2.jpg
-		docs\images\onion-arch3.png = docs\images\onion-arch3.png
-		docs\images\onion_architecture.webp = docs\images\onion_architecture.webp
-		docs\images\onyx.jpg = docs\images\onyx.jpg
-		docs\images\solution-step1.jpg = docs\images\solution-step1.jpg
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "steps", "steps", "{55576E77-86EF-4393-94FD-0183E6A2876C}"
-	ProjectSection(SolutionItems) = preProject
-		docs\steps\step1.md = docs\steps\step1.md
-		docs\steps\step2.md = docs\steps\step2.md
-		docs\steps\step3.md = docs\steps\step3.md
-	EndProjectSection
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -110,9 +83,6 @@ Global
 		{3DC98618-523B-44EA-8B6B-F0E7808D827E} = {0E08CF67-25C5-4AB6-B0F5-F7206E1DFFF2}
 		{4617558E-5ADB-4085-AF92-AF1C2F042749} = {0E08CF67-25C5-4AB6-B0F5-F7206E1DFFF2}
 		{4125B08E-BFD5-4943-A11E-593CB0B28AFF} = {0E08CF67-25C5-4AB6-B0F5-F7206E1DFFF2}
-		{9EC63DC7-1846-4E4A-A61D-28FF7681E6CD} = {F93F236F-AFA0-42DB-B233-C8C6E6DFFF71}
-		{E18D621F-08F0-4C7F-A735-832E6AD32B2B} = {9EC63DC7-1846-4E4A-A61D-28FF7681E6CD}
-		{55576E77-86EF-4393-94FD-0183E6A2876C} = {9EC63DC7-1846-4E4A-A61D-28FF7681E6CD}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {15FFD2C8-9B91-47BA-AC83-19552CDF8D4F}
