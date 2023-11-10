@@ -31,13 +31,14 @@ FOR /L %%A IN (1,1,%INDEX%) DO (
     xcopy /K /S /Y /I /Q  "tempo/docs" "Onyx/docs/*"
 
     cd Onyx
-    git sl
-    git stash
+    git sl     
     git add .
     git commit -m "doc update"
     git push
     git checkout master
     cd ..
 )
+
+rmdir /S /Q "tempo"
 
 PAUSE
