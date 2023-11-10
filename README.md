@@ -38,13 +38,13 @@ Ou sinon, vous prenez la branche master qui est la branche la plus complète et 
 - [Step1 : Structure de solution](docs/steps/step1.md)
 - [Step2 : Premier endpoint Api](docs/steps/step2.md)
 - [Step3 : Test endpoint Api Rest](docs/steps/step3.md)
-- [Step4 : Application Service & Tests](docs/steps/step4.md)
-- [Step5 : DataService & Tests](docs/steps/step5.md)
-- [Step6 : Mapping & Tests](docs/steps/step6.md)
-- [Step7 : Repository Pattern & ORM (Entity Framework)](docs/steps/step7.md)
-- [Step8 : Entity Framework & Migrations](docs/steps/step7.md)
-- [Step9 : Finalisation de la chaine de données & Tests](docs/steps/step7.md)
-- [Step10 : Code Coverage](docs/steps/step7.md)
+- [Step4 : Application Service et Tests](docs/steps/step4.md)
+- [Step5 : DataService et Tests](docs/steps/step5.md)
+- [Step6 : Mapping et Tests](docs/steps/step6.md)
+- [Step7 : ORM (Entity Framework) et Tests](docs/steps/step7.md)
+- [Step8 : Entity Framework](docs/steps/step8.md)
+- [Step9 : Finalisation de la chaine de données](docs/steps/step9.md)
+- [Step10 : Code Coverage ](docs/steps/step10.md)
 
 ## Git
 
