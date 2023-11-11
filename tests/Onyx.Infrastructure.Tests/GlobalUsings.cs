@@ -1,1 +1,10 @@
 global using Xunit;
+global using AutoMapper;
+global using Microsoft.EntityFrameworkCore;
+global using Moq;
+global using Onyx.Core.Interfaces;
+global using Onyx.Core.Models.Domain;
+global using Onyx.Infrastructure.Datas;
+global using Onyx.Infrastructure.Models.Entities;
+global using Onyx.Infrastructure.Services;
+global using AutoFixture;

@@ -1,10 +1,4 @@
-﻿using Onyx.Core.Interfaces;
-using Onyx.Application.Extensions;
-using AutoMapper;
-using Onyx.Core.Common;
-using Onyx.Application.Dtos;
-
-namespace Onyx.Application.Services
+﻿namespace Onyx.Application.Services
 {
     public class WeatherForecastAppServices : IWeatherForecastAppServices
     {
@@ -24,9 +18,16 @@ namespace Onyx.Application.Services
 
         public async Task<IEnumerable<WeatherForecastDto>?> GetAllAsync()
         {
-            var weatherForecastList = await _weatherForecastDataServices.GetAllAsync();
+            try
+            {
+                var weatherForecastList = await _weatherForecastDataServices.GetAllAsync();
 
-            return weatherForecastList == null ? (IEnumerable<WeatherForecastDto>?)null : weatherForecastList.Select(x => _mapper.Map<WeatherForecastDto>(x));
+                return weatherForecastList == null ? (IEnumerable<WeatherForecastDto>?)null : weatherForecastList.Select(x => _mapper.Map<WeatherForecastDto>(x));
+            }
+            catch (Exception ex)
+            {
+                return null;
+            }
         }
 
         public async Task<OperationResult<WeatherForecastDto?>> GetByIdAsync(Guid guid)
@@ -56,7 +57,7 @@ namespace Onyx.Application.Services
             var operation = new OperationResult<Guid>();
             try
             {
-                if (weatherForecastDto.TemperatureC <= 0)
+                if (weatherForecastDto != null && weatherForecastDto.TemperatureC <= 0)
                 {
                     await _notificationsService.WeatherAlertAsync("Attention risque de gel", 0, DateTime.UtcNow);
                 }
