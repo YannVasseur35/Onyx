@@ -33,7 +33,7 @@ namespace Onyx.Application.Tests
             //Arrange
 
             //Act
-            var results = await _weatherForecastAppServices.GetAllWeatherForecasts();
+            var results = await _weatherForecastAppServices.GetAllAsync();
 
             //Assert
             Assert.NotNull(results);
@@ -51,7 +51,7 @@ namespace Onyx.Application.Tests
             _weatherForecastDataServices.Setup(x => x.GetAllAsync()).ReturnsAsync(mocks);
 
             //Act
-            var results = await _weatherForecastAppServices.GetAllWeatherForecasts();
+            var results = await _weatherForecastAppServices.GetAllAsync();
 
             //Assert
             Assert.NotNull(results);
@@ -66,7 +66,7 @@ namespace Onyx.Application.Tests
             mock.Object.TemperatureC = 0;
 
             //Act
-            var operation = await _weatherForecastAppServices.CreateWeatherForecasts(mock.Object);
+            var operation = await _weatherForecastAppServices.SaveAsync(mock.Object);
 
             //Assert
             Assert.True(operation.IsOperationSuccess);

@@ -2,12 +2,12 @@
 {
     public interface IDataService<T>
     {
-        Task<T?> GetAsync(string id);
+        Task<T?> GetAsync(Guid id);
 
         Task<IEnumerable<T>?> GetAllAsync();
 
-        Task AddOrUpdateAsync(T entity);
+        Task<Guid> AddOrUpdateAsync(T entity);
 
-        Task DeleteAsync(string id);
+        Task DeleteAsync(Guid id);
     }
 }

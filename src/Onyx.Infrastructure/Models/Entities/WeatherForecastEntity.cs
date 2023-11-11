@@ -6,9 +6,21 @@ using System.Threading.Tasks;
 
 namespace Onyx.Infrastructure.Models.Entities
 {
-    public class WeatherForecastEntity
+    public class WeatherForecastEntity : IAudit
     {
-        public Guid Id { get; set; }
+        public WeatherForecastEntity()
+        {
+            Init(Guid.NewGuid(), DateTime.UtcNow);
+        }
+
+        public void Init(Guid id, DateTime createdAt)
+        {
+            Id = id;
+            CreatedAt = createdAt;
+            ModifiedAt = createdAt;
+        }
+
+        public Guid Id { get; private set; }
         public DateTime Date { get; set; }
         public int TemperatureC { get; set; }
         public int TemperatureF { get; set; }
@@ -18,7 +30,9 @@ namespace Onyx.Infrastructure.Models.Entities
         public string? City { get; set; }
         public decimal Latitude { get; set; }
         public decimal Longitude { get; set; }
-
         public decimal Humidity { get; set; }
+
+        public DateTime CreatedAt { get; private set; }
+        public DateTime ModifiedAt { get; set; }
     }
 }

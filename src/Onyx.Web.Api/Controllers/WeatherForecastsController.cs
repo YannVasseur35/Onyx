@@ -14,11 +14,91 @@ namespace Onyx.Web.Api.Controllers
             _weatherForecastAppServices = weatherForecastAppServices;
         }
 
-        [HttpGet("")]
-        [ProducesResponseType(typeof(IEnumerable<WeatherForecastDto>), StatusCodes.Status200OK)]
-        public async Task<IActionResult> GetAll()
+        [HttpGet]
+        [Route("")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(IEnumerable<WeatherForecastDto>))]
+        public async Task<IActionResult> GetAsync()
         {
-            return Ok(await _weatherForecastAppServices.GetAllWeatherForecasts());
+            var dtos = await _weatherForecastAppServices.GetAllAsync();
+
+            return Ok(dtos);
+        }
+
+        [HttpGet]
+        [Route("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(WeatherForecastDto))]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetByIdAsync(Guid? id)
+        {
+            if (id == null || id == Guid.Empty)
+            {
+                return BadRequest();
+            }
+#pragma warning disable S2583
+            var operation = await _weatherForecastAppServices.GetByIdAsync(id ?? Guid.Empty);
+#pragma warning restore S2583
+            if (operation.IsOperationSuccess)
+            {
+                if (operation.Model != null)
+                {
+                    return Ok(operation.Model);
+                }
+                else
+                {
+                    return NoContent();
+                }
+            }
+
+            return BadRequest(operation.ErrorMessage);
+        }
+
+        [HttpPost]
+        [HttpPut]
+        [Route("")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(Guid))]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> PostWeatherForecastDtoAsync(WeatherForecastDto? weatherForecastDto)
+        {
+            if (weatherForecastDto == null)
+            {
+                return BadRequest();
+            }
+
+            var operation = await _weatherForecastAppServices.SaveAsync(weatherForecastDto);
+
+            if (operation.IsOperationSuccess)
+            {
+                return Ok(operation.Model);
+            }
+            else
+            {
+                return BadRequest(operation.ErrorMessage);
+            }
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> DeleteWeatherForecastDtoAsync(Guid? id)
+        {
+            if (id == null || id == Guid.Empty)
+            {
+                return BadRequest();
+            }
+#pragma warning disable S2583
+            var operation = await _weatherForecastAppServices.DeleteAsync(id ?? Guid.Empty);
+#pragma warning restore S2583
+            if (operation.IsOperationSuccess)
+            {
+                return Ok();
+            }
+            else
+            {
+                return NoContent();
+            }
         }
     }
 }

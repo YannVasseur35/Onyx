@@ -1,6 +1,8 @@
 ﻿using Onyx.Core.Interfaces;
 using Onyx.Application.Extensions;
 using AutoMapper;
+using Onyx.Core.Common;
+using Onyx.Application.Dtos;
 
 namespace Onyx.Application.Services
 {
@@ -20,23 +22,73 @@ namespace Onyx.Application.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<WeatherForecastDto>?> GetAllWeatherForecasts()
+        public async Task<IEnumerable<WeatherForecastDto>?> GetAllAsync()
         {
             var weatherForecastList = await _weatherForecastDataServices.GetAllAsync();
 
-            return weatherForecastList.Select(x => _mapper.Map<WeatherForecastDto>(x));
+            return weatherForecastList == null ? (IEnumerable<WeatherForecastDto>?)null : weatherForecastList.Select(x => _mapper.Map<WeatherForecastDto>(x));
         }
 
-        public async Task<Operation> CreateWeatherForecasts(WeatherForecastDto weatherForecastDto)
+        public async Task<OperationResult<WeatherForecastDto?>> GetByIdAsync(Guid guid)
         {
-            //Todo: creation of weatherForecastDto
-
-            if (weatherForecastDto.TemperatureC <= 0)
+            var operation = new OperationResult<WeatherForecastDto?>();
+            try
             {
-                await _notificationsService.WeatherAlertAsync("Attention risque de gel", 0, DateTime.UtcNow);
-            }
+                if (guid == Guid.Empty)
+                {
+                    return operation.Build(null, "id should not be null or empty", false, OperationErrorType.Functional);
+                }
 
-            return new Operation();
+                var feedback = await _weatherForecastDataServices.GetAsync(guid);
+
+                var feedbackDto = _mapper.Map<WeatherForecastDto>(feedback);
+
+                return operation.Build(feedbackDto);
+            }
+            catch (Exception ex)
+            {
+                return operation.Build(null, ex.Message, false, OperationErrorType.Technical);
+            }
+        }
+
+        public async Task<OperationResult<Guid>> SaveAsync(WeatherForecastDto weatherForecastDto)
+        {
+            var operation = new OperationResult<Guid>();
+            try
+            {
+                if (weatherForecastDto.TemperatureC <= 0)
+                {
+                    await _notificationsService.WeatherAlertAsync("Attention risque de gel", 0, DateTime.UtcNow);
+                }
+
+                Guid guid = await _weatherForecastDataServices.AddOrUpdateAsync(_mapper.Map<WeatherForecast>(weatherForecastDto));
+
+                return operation.Build(guid);
+            }
+            catch (Exception ex)
+            {
+                return operation.Build(Guid.Empty, ex.Message, false, OperationErrorType.Technical);
+            }
+        }
+
+        public async Task<Operation> DeleteAsync(Guid guid)
+        {
+            var operation = new Operation();
+            try
+            {
+                if (guid == Guid.Empty)
+                {
+                    return operation.Build("Guid should not be null or empty", false, OperationErrorType.Functional);
+                }
+
+                await _weatherForecastDataServices.DeleteAsync(guid);
+
+                return operation.Build();
+            }
+            catch (Exception ex)
+            {
+                return operation.Build(ex.Message, false, OperationErrorType.Technical);
+            }
         }
     }
 }
