@@ -4,9 +4,11 @@ using Microsoft.Extensions.Logging;
 using Onyx.Core.Models.Domain;
 using Onyx.Infrastructure.Models.Entities;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 
 namespace Onyx.Infrastructure.Datas
 {
+    [ExcludeFromCodeCoverage]
     public static class OnyxDbInitializer
     {
         public static void CreateDbIfNotExists(IServiceScope scope, ILogger logger)

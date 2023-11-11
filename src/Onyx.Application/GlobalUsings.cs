@@ -5,6 +5,6 @@ global using Onyx.Application.Dtos;
 global using Onyx.Core.Common;
 global using Microsoft.Extensions.Logging;
 global using Onyx.Core.Interfaces;
-global using Onyx.Application.Extensions;
+
 global using AutoMapper;
 global using Onyx.Application.Mappings;

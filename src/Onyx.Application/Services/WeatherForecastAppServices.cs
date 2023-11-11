@@ -18,16 +18,9 @@
 
         public async Task<IEnumerable<WeatherForecastDto>?> GetAllAsync()
         {
-            try
-            {
-                var weatherForecastList = await _weatherForecastDataServices.GetAllAsync();
+            var weatherForecastList = await _weatherForecastDataServices.GetAllAsync();
 
-                return weatherForecastList == null ? (IEnumerable<WeatherForecastDto>?)null : weatherForecastList.Select(x => _mapper.Map<WeatherForecastDto>(x));
-            }
-            catch (Exception ex)
-            {
-                return null;
-            }
+            return weatherForecastList == null ? (IEnumerable<WeatherForecastDto>?)null : weatherForecastList.Select(x => _mapper.Map<WeatherForecastDto>(x));
         }
 
         public async Task<OperationResult<WeatherForecastDto?>> GetByIdAsync(Guid guid)
