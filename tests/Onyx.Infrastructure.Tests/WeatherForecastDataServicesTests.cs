@@ -86,7 +86,7 @@
                 Assert.NotNull(result);
                 Assert.True(result.Summary == weatherForecast.Summary);
                 Assert.True(result.Id != Guid.Empty);
-                Assert.True(result.CreatedAt > DateTime.UtcNow.AddSeconds(-5));
+                Assert.True(result.CreatedAt == result.ModifiedAt);
                 Assert.True(result.ModifiedAt > DateTime.UtcNow.AddSeconds(-5));
             }
         }
