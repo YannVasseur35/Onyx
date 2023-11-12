@@ -1,0 +1,94 @@
+# ASP.NET Core
+# Build and test ASP.NET Core projects targeting .NET Core.
+# Add steps that run tests, create a NuGet package, deploy, and more:
+# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+
+trigger:
+- master
+
+pool:
+  vmImage: ubuntu-latest
+
+variables:
+  dotnetSdkVersion: '7.x'
+  projectPath: 'src/Onux.Web.Api/Onyx.Web.Api.csproj' 
+  buildConfiguration: 'Release'
+  dateToday: 'Will be set dynamically'
+  revision: $[counter(format('{0:dd}', pipeline.startTime), 1)]  
+  versionString: > 
+    $(dateToday).$(revision)
+steps:
+
+# .net SDK version
+- task: UseDotNet@2
+  displayName: 'Use .NET SDK $(dotnetSdkVersion)'
+  inputs:
+    version: '$(dotnetSdkVersion)'
+
+# Nuget Restore installer version
+# https://dist.nuget.org/tools.json
+- task: NuGetToolInstaller@1
+  inputs:
+    versionSpec: 6.4.0 
+
+# Build info file
+- script: 'echo "$(Build.DefinitionName), $(Build.BuildId), $(Build.BuildNumber)" > buildinfo.txt'
+  displayName: 'Write build info'
+  workingDirectory: $(Agent.BuildDirectory)
+
+# Build
+- task: DotNetCoreCLI@2
+  displayName: 'Build the project - $(buildConfiguration)'
+  inputs:
+    command: 'build'
+    arguments: '--configuration $(buildConfiguration)'
+    projects: '$(projectPath)'
+
+# Run Tests
+- task: DotNetCoreCLI@2
+  displayName: 'Run unit tests - $(buildConfiguration)'
+  inputs:
+    command: 'test'
+    arguments: '--configuration $(buildConfiguration)'
+    publishTestResults: true
+    projects: '**/*.Tests.csproj'
+
+#Preparing Build Number
+- task: PowerShell@2
+  displayName: 'Preparing Build Number'
+  inputs:
+    targetType: 'inline'
+    script: |
+      $currentDate = $(Get-Date)
+      $year = $currentDate.Year
+      $month = $currentDate.Month
+      $day = $currentDate.Day
+      Write-Host $currentDate
+      Write-Host $day
+      Write-Host $env:revision
+      Write-Host "##vso[task.setvariable variable=dateToday]$year.$month.$day"
+
+#display value
+- script: echo $(versionString)
+  displayName: 'versionString display'
+
+# Publish  
+- task: DotNetCoreCLI@2
+  displayName: Publish
+  inputs:
+    command: 'publish'
+    publishWebProjects: false
+    projects: '$(projectPath)'
+    arguments: '--configuration $(buildConfiguration) --output $(build.artifactdirectory) /p:Version=$(versionString)'
+    zipAfterPublish: false
+    modifyOutputPath: false
+
+# Copy files over SSH
+- task: CopyFilesOverSSH@0
+  displayName: 'Uploading files SFTP'
+  inputs:
+    sshEndpoint: 'SSH connexion'
+    sourceFolder: $(build.artifactdirectory)
+    targetFolder: '/var/www/api.meteo.fr' 
+    cleanTargetFolder: true 
+
