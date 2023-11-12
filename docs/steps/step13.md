@@ -41,25 +41,23 @@ Le déploiement continue permet de livrer votre application à vos clients. Ca p
 Bref, c'est votre tambouille. Dans notre cas, c'est une Api web qu'on déposera via SSH sur un VPS fictif. 
 
 
-### Branche git
+## Branche git
 
 Je vous conseille d'aller jetter un oeil sur Git Flow : https://danielkummer.github.io/git-flow-cheatsheet/index.fr_FR.html
 
 Bloquer la branche master à toute modification des devs peut paraitre absurde, mais vous allez voir qu'avoir une branche propre, à jour, qui compile, et marche, c'est une très bonne chose. Vous trouverez comment faire dans cet article. https://reactor.fr/azure-devops-pull-request/
 
-On va créer une nouvelle branche "develop" qui va nous servir de branche principale de travail. 
+Il faut alors créer une nouvelle branche "develop" qui va nous servir de branche principale de travail. 
 
-Maintenant à vous de voir, vous pouvez tous bosser sur la branche develop et merger votre code quand il faut. Ou vous pouvez créer une branche 'feature', 'fix' ou autre et rebaser votre code, puis pousser cette branche sur le serveur. Enfin, avec Azure Devops vous demander une Pull Request pour l'intégrer dans votre branche dev. 
+Maintenant à vous de voir, vous pouvez tous bosser sur la branche develop et merger votre code quand il faut. Ou vous pouvez créer une branche 'feature', 'fix' ou autre et rebaser votre code, puis pousser cette branche sur le repo distant. Enfin, avec Azure Devops vous demander une Pull Request pour l'intégrer dans votre branche dev. 
 
-On a plein de façon de faire. Je pense qu'il faut être pragmatique ici. Si l'équipe n'est pas à l'aise avec git ou plein de branche, si l'équipe est petite ou que chacun bosse sur une partie bien distinct, ce n'est peut être pas la peine de pousser le git-flow jusqu'au boutisme. 
+On a pleins de façon de faire. Je pense qu'il faut être pragmatique ici. Si l'équipe n'est pas à l'aise avec git ou plein de branche, si l'équipe est petite ou que chacun bosse sur une partie bien distinct, ce n'est peut être pas la peine de pousser le git-flow jusqu'au boutisme. 
 
 ## Pipeline CI
 
-Nous allons créer une seule pipeline pour l'exemple, car dans ce projet je n'ai ni staging, ni prod. Elle se trouve dans le dossier 'devops' à la racine.
+Onyx n'aipas de branche develop. Nous allons créer une seule pipeline pour l'exemple, car dans ce projet je n'ai ni staging, ni prod. Elle se trouve dans le dossier 'devops' à la racine.
 
-Une pipeline (gros tuyaux) est une succession de tâche sous forme d'un fichier .yaml. C'est un fichier dont la structure est "normée", par exemple l'indentation est importante. 
-
-Une pipeline va donc donner une suite d'instruction à effectuer. Si une échoue, la pipeline s'arrête et ne poursuit pas.
+Une pipeline (gros tuyaux) est une succession de tâche listées dans un fichier .yaml. C'est un fichier dont la structure est "normée", par exemple l'indentation est importante. Une pipeline va donc donner une suite d'instruction à effectuer. Si une échoue, la pipeline s'arrête et ne poursuit pas.
 
 Nous allons faire ceci dans cet ordre :
 
@@ -179,13 +177,22 @@ steps:
 
 ```
 
-Pour cette dernière étape, le serveur distant n'existe pas. C'est pour vous montrer qu'avec une connexion SSH on peut le mettre à jour. 'SSH connexion' est le nom (fictif) d'une connexion SSH enregistrée sur Azure Devops. Si vous voulez en savoir plus : https://reactor.fr/azure-devops-pipeline-ci-cd-deploy/
+Pour cette dernière étape, le serveur distant n'existe pas. 'SSH connexion' est le nom (fictif) d'une connexion SSH enregistrée sur Azure Devops. Si vous voulez en savoir plus : https://reactor.fr/azure-devops-pipeline-ci-cd-deploy/
 
 Il ne vous reste plus qu'à créer une pipeline sur Azure Devops en prenant soins de séléctionner ce fichier yaml.
 
-Pour cela soit vous le créez en ligne, soit vous le commit/push sur la branche master. (qui à ce moment la ne doit pas être bloquée.)
+Pour cela soit vous le créez en ligne, soit vous le commit/push sur la branche master. (qui à ce moment la ne doit pas être bloquée ;) )
 
-Notez qu'il va vous falloir faire un peu de gymnasitique intellectuel lorsque vous allez jouer avec plusieurs branche (master et develop par exemple) qui auront des triggers sur celle ci. Or si vous uploader une modification du fichier yaml sur la branche develop, elle ne sera pas prise en compte que lorsque du merge futur(PR) vers master.
+Notez qu'il va vous falloir faire un peu de gymnastique intellectuelle lorsque vous allez jouer avec plusieurs branche (master et develop par exemple) qui auront des triggers sur celle ci. Or si vous uploader une modification du fichier yaml sur la branche develop, elle ne sera prise en compte que lorsque du merge futur(PR) vers master. Cependant Azure Devops vous permet de choisir une branche manuellement lors d'un run manuel d'une pipeline.
+
+# Conclusion :
+
+Azure Devops regorge d'outils pour les développeurs et les 'ops'. Utiliser des pipelines pour alimenter une CI/CD permet d'assurer une excellente qualité de code et une livraison de vos travaux automatique sans prise de tête.
+
+Couplé à des tests, vous avez un combo gagnant pour votre équipe. 
+
+
+
 
 
 
