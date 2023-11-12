@@ -1,9 +1,6 @@
 # Prise de note : prochain sujet à aborder 
 
-Readme : expliquer l'apprentissage, qu'on fera des erreurs et qu'on les corrigera
-
-
-# LOGGer
+# Logger
 
 # Clean DI
 
