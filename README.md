@@ -53,7 +53,7 @@ Vous avez deux façon de voir les choses :
 - [Step10 : Code Coverage ](docs/steps/step10.md)
 - [Step11 : CRUD : Implémentation et Tests](docs/steps/step11.md)
 - [Step12 : Tests d'intégration](docs/steps/step12.md)
-
+- [Step13 : CI/CD AzureDevops Pipeline](docs/steps/step13.md)
 
 ## Git
 
