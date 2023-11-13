@@ -32,7 +32,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Onyx.Web.Api.Tests", "tests
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Onyx.Core.Tests", "tests\Onyx.Core.Tests\Onyx.Core.Tests.csproj", "{4125B08E-BFD5-4943-A11E-593CB0B28AFF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Onyx.Web.Api.Integration.Tests", "tests\Onyx.Web.Api.Integration.Tests\Onyx.Web.Api.Integration.Tests.csproj", "{0F67CF5F-03C0-4874-A01C-DE45C0FC5E3A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Onyx.Web.Api.Integration.Tests", "tests\Onyx.Web.Api.Integration.Tests\Onyx.Web.Api.Integration.Tests.csproj", "{0F67CF5F-03C0-4874-A01C-DE45C0FC5E3A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "devops", "devops", "{D0CCC1A2-37B0-4486-850F-929220A77954}"
+	ProjectSection(SolutionItems) = preProject
+		devops\master-prod.yaml = devops\master-prod.yaml
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -90,6 +95,7 @@ Global
 		{4617558E-5ADB-4085-AF92-AF1C2F042749} = {0E08CF67-25C5-4AB6-B0F5-F7206E1DFFF2}
 		{4125B08E-BFD5-4943-A11E-593CB0B28AFF} = {0E08CF67-25C5-4AB6-B0F5-F7206E1DFFF2}
 		{0F67CF5F-03C0-4874-A01C-DE45C0FC5E3A} = {0E08CF67-25C5-4AB6-B0F5-F7206E1DFFF2}
+		{D0CCC1A2-37B0-4486-850F-929220A77954} = {F93F236F-AFA0-42DB-B233-C8C6E6DFFF71}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {15FFD2C8-9B91-47BA-AC83-19552CDF8D4F}
