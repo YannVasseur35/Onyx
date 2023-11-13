@@ -32,6 +32,11 @@ steps:
   inputs:
     versionSpec: 6.4.0 
 
+# Restore nuget packages
+- task: NuGetCommand@2
+  inputs:
+    restoreSolution: '**/*.sln'
+
 # Build info file
 - script: 'echo "$(Build.DefinitionName), $(Build.BuildId), $(Build.BuildNumber)" > buildinfo.txt'
   displayName: 'Write build info'
