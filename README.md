@@ -15,7 +15,7 @@ On va prendre comme exemple une application de météo (qui est d'ailleurs l'exe
 
 - Une API qui expose des données
 - une base de données SQLite avec EntityFramwork (code first)
-- Une clean architecture avec de nombreux tests
+- Une clean architecture avec de nombreux tests + code coverage
 - CI/CD avec une pipeline AzureDevops
 
 ## Introduction
@@ -32,11 +32,11 @@ J'ai donc entrepris ce projet Onyx.
 
 ## Progression
 
-Vous avez deux façon de voir les choses :
+Vous avez deux façons de voir les choses :
 
-- la rapide. Restez sur la branche master, la plus à jour et dernière en date. Vous avez tout le code source et tous les tests. Regardez le code et inspirez en vous. 
+- la rapide. Restez sur la branche master, la plus à jour et dernière en date. Vous avez tout le code source et tous les tests. Regardez le code et inspirez-en vous, prennez ce qui vous intéresse. 
 
-- l'apprentissage. Ce sera plus lent, mais j'explique tous les concepts pas à pas. On démarre gentillement et on progresse par étape (step) avec une général un concept. C'est une sorte de TP (travaux pratique) qu'on faisait à l'école. Pour suivre ce TP il faudra "naviguer" avec Git de branche en branche. C'est simple, toutes les branches s'appellent 'step' suvit d'un numéro. Chaque step aura sa propre doc (ex: step2.md). Suffit de s'y référer pour comprendre ce qu'y a été fait à chaque étape. 
+- l'apprentissage. Ce sera plus lent, mais j'explique tous les concepts pas à pas. On démarre gentillement et on progresse par étape (step). C'est une sorte de TP (travaux pratique) qu'on faisait à l'école. Pour suivre ce TP il faudra "naviguer" avec Git de branche en branche. C'est simple, toutes les branches s'appellent 'step' suvit d'un numéro. Chaque step aura sa propre doc (ex: step2.md). Suffit de s'y référer pour comprendre ce qu'y a été fait à chaque étape. 
 
 
 ## Sommaire
@@ -54,6 +54,7 @@ Vous avez deux façon de voir les choses :
 - [Step11 : CRUD : Implémentation et Tests](docs/steps/step11.md)
 - [Step12 : Tests d'intégration](docs/steps/step12.md)
 - [Step13 : CI/CD AzureDevops Pipeline](docs/steps/step13.md)
+- [Step14 : Pipeline avec Code Coverage](docs/steps/step14.md)
 
 ## Git
 
