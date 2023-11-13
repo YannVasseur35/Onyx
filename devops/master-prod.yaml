@@ -11,7 +11,7 @@ pool:
 
 variables:
   dotnetSdkVersion: '7.x'
-  projectPath: 'src/Onux.Web.Api/Onyx.Web.Api.csproj' 
+  projectPath: 'src/Onyx.Web.Api/Onyx.Web.Api.csproj' 
   buildConfiguration: 'Release'
   dateToday: 'Will be set dynamically'
   revision: $[counter(format('{0:dd}', pipeline.startTime), 1)]  
