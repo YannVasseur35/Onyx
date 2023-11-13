@@ -118,14 +118,14 @@ steps:
     zipAfterPublish: false
     modifyOutputPath: false
 
-# Copy files over SSH
-- task: CopyFilesOverSSH@0
-  displayName: 'Uploading files SFTP'
-  inputs:
-    sshEndpoint: 'SSH connexion'
-    sourceFolder: $(build.artifactdirectory)
-    targetFolder: '/var/www/api.meteo.fr' 
-    cleanTargetFolder: true 
+# # Copy files over SSH
+# - task: CopyFilesOverSSH@0
+#   displayName: 'Uploading files SFTP'
+#   inputs:
+#     sshEndpoint: 'SSH connexion'
+#     sourceFolder: $(build.artifactdirectory)
+#     targetFolder: '/var/www/api.meteo.fr' 
+#     cleanTargetFolder: true 
 
 # Publish Artifact
 - task: PublishBuildArtifacts@1
