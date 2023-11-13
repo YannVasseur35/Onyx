@@ -84,14 +84,14 @@ steps:
     targetType: 'inline'
     script: reportgenerator -reports:$(Build.SourcesDirectory)/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/CodeCoverage -reporttypes:HtmlInline_AzurePipelines
 
-# Merge Code Coverage Report
-- task: reportgenerator@4
-  displayName: 'Merge code coverage reports'
-  inputs:
-    reports: '$(Build.SourcesDirectory)/**/coverage.cobertura.xml'
-    targetdir: '$(Pipeline.Workspace)/coverlet'
-    reporttypes: 'Cobertura'
-    verbosity: 'Verbose'
+# # Merge Code Coverage Report
+# - task: reportgenerator@4
+#   displayName: 'Merge code coverage reports'
+#   inputs:
+#     reports: '$(Build.SourcesDirectory)/**/coverage.cobertura.xml'
+#     targetdir: '$(Pipeline.Workspace)/coverlet'
+#     reporttypes: 'Cobertura'
+#     verbosity: 'Verbose'
 
 # Publish Code Coverage Report
 - task: PublishCodeCoverageResults@1
