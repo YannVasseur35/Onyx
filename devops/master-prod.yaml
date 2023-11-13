@@ -57,7 +57,7 @@ steps:
   displayName: 'Run unit tests - $(buildConfiguration)'
   inputs:
     command: 'test'
-    arguments: '--configuration $(buildConfiguration) '
+    arguments: '--configuration $(buildConfiguration) --logger trx --results-directory "$(Build.SourcesDirectory)/TestResults/Coverage/"  --collect "XPlat Code Coverage"'
     publishTestResults: false
     projects: '**/*.Tests.csproj'
 
