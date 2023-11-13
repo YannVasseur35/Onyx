@@ -113,15 +113,15 @@ steps:
   displayName: 'versionString display'
 
 # Publish  
-- task: DotNetCoreCLI@2
-  displayName: Publish
-  inputs:
-    command: 'publish'
-    publishWebProjects: false
-    projects: '$(projectPath)'
-    arguments: '--configuration $(buildConfiguration) --output $(build.artifactdirectory) /p:Version=$(versionString)'
-    zipAfterPublish: false
-    modifyOutputPath: false
+# - task: DotNetCoreCLI@2
+#   displayName: Publish
+#   inputs:
+#     command: 'publish'
+#     publishWebProjects: false
+#     projects: '$(projectPath)'
+#     arguments: '--configuration $(buildConfiguration) --output $(build.artifactdirectory) /p:Version=$(versionString)'
+#     zipAfterPublish: false
+#     modifyOutputPath: false
 
 # # Copy files over SSH
 # - task: CopyFilesOverSSH@0
@@ -133,7 +133,7 @@ steps:
 #     cleanTargetFolder: true 
 
 # Publish Artifact
-- task: PublishBuildArtifacts@1
-  displayName: 'Publish Artifact: drop'
-  condition: succeeded()
+# - task: PublishBuildArtifacts@1
+#   displayName: 'Publish Artifact: drop'
+#   condition: succeeded()
 
