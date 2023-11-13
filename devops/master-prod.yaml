@@ -93,26 +93,26 @@ steps:
 
 # --------------------------- #
 
-#Preparing Build Number
-- task: PowerShell@2
-  displayName: 'Preparing Build Number'
-  inputs:
-    targetType: 'inline'
-    script: |
-      $currentDate = $(Get-Date)
-      $year = $currentDate.Year
-      $month = $currentDate.Month
-      $day = $currentDate.Day
-      Write-Host $currentDate
-      Write-Host $day
-      Write-Host $env:revision
-      Write-Host "##vso[task.setvariable variable=dateToday]$year.$month.$day"
+# #Preparing Build Number
+# - task: PowerShell@2
+#   displayName: 'Preparing Build Number'
+#   inputs:
+#     targetType: 'inline'
+#     script: |
+#       $currentDate = $(Get-Date)
+#       $year = $currentDate.Year
+#       $month = $currentDate.Month
+#       $day = $currentDate.Day
+#       Write-Host $currentDate
+#       Write-Host $day
+#       Write-Host $env:revision
+#       Write-Host "##vso[task.setvariable variable=dateToday]$year.$month.$day"
 
-#display value
-- script: echo $(versionString)
-  displayName: 'versionString display'
+# #display value
+# - script: echo $(versionString)
+#   displayName: 'versionString display'
 
-# Publish  
+# # Publish  
 # - task: DotNetCoreCLI@2
 #   displayName: Publish
 #   inputs:
