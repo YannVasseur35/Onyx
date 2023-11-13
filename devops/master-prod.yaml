@@ -17,6 +17,7 @@ variables:
   revision: $[counter(format('{0:dd}', pipeline.startTime), 1)]  
   versionString: > 
     $(dateToday).$(revision)
+
 steps:
 
 # .net SDK version
@@ -44,14 +45,48 @@ steps:
     arguments: '--configuration $(buildConfiguration)'
     projects: '$(projectPath)'
 
+# --------------------------- #
+
 # Run Tests
 - task: DotNetCoreCLI@2
   displayName: 'Run unit tests - $(buildConfiguration)'
   inputs:
     command: 'test'
-    arguments: '--configuration $(buildConfiguration)'
-    publishTestResults: true
+    arguments: '--no-build --configuration $(buildConfiguration) --logger trx --results-directory "$(Build.SourcesDirectory)/TestResults/Coverage/"  --collect "XPlat Code Coverage"'
+    publishTestResults: false
     projects: '**/*.Tests.csproj'
+
+# Publish Test Results
+- task: PublishTestResults@2
+  displayName: 'Publish Test Results'
+  inputs: 
+    testResultsFormat: VSTest
+    testResultsFiles: '**/*.trx'
+    searchFolder: '$(Build.SourcesDirectory)/TestResults/Coverage/'
+    
+# Install Tool ReportGenerator
+- task: DotNetCoreCLI@2
+  displayName: 'dotnet Tool Install "reportgenerator"'
+  inputs:
+    command: custom
+    custom: tool
+    arguments: 'install -g dotnet-reportgenerator-globaltool'
+
+# Create Code Coverage Report
+- task: PowerShell@2
+  displayName: 'Create Code Coverage Report'
+  inputs:
+    targetType: 'inline'
+    script: reportgenerator -reports:$(Build.SourcesDirectory)/**/coverage.cobertura.xml -targetdir:$(Build.SourcesDirectory)/CodeCoverage -reporttypes:HtmlInline_AzurePipelines
+
+# Publish Code Coverage Report
+- task: PublishCodeCoverageResults@1
+  displayName: 'Publish Code Coverage Report'
+  inputs:
+    codeCoverageTool: 'cobertura'
+    summaryFileLocation: '$(Build.SourcesDirectory)/**/coverage.cobertura.xml'
+
+# --------------------------- #
 
 #Preparing Build Number
 - task: PowerShell@2
@@ -91,4 +126,9 @@ steps:
     sourceFolder: $(build.artifactdirectory)
     targetFolder: '/var/www/api.meteo.fr' 
     cleanTargetFolder: true 
+
+# Publish Artifact
+- task: PublishBuildArtifacts@1
+  displayName: 'Publish Artifact: drop'
+  condition: succeeded()
 
