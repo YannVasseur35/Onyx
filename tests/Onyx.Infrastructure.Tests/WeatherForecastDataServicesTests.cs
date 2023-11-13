@@ -110,6 +110,7 @@
                 //Act
                 var weatherForecast = _fixture.Create<WeatherForecast>();
                 weatherForecast.Id = id;
+                weatherForecast.CreatedAt = createdAt; //Otherwise, fixture will make it random
                 await service.AddOrUpdateAsync(weatherForecast);
 
                 //Assert
