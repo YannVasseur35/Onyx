@@ -96,8 +96,8 @@
             using (var context = new OnyxDbContext(CreateNewContextOptions()))
             {
                 //Arrange
-                DateTime createdAt = DateTime.UtcNow.AddDays(-5);
                 Guid id = Guid.NewGuid();
+                DateTime createdAt = DateTime.UtcNow.AddDays(-5);
 
                 _fixture.Customize<WeatherForecastEntity>(c => c.Do(o => o.Init(id, createdAt)));
                 var entityInDb = _fixture.Create<WeatherForecastEntity>();
@@ -109,6 +109,7 @@
                 //Act
                 var weatherForecast = _fixture.Create<WeatherForecast>();
                 weatherForecast.Id = id;
+                weatherForecast.CreatedAt = createdAt; //Otherwise, fixture will make it random
                 await service.AddOrUpdateAsync(weatherForecast);
 
                 //Assert
