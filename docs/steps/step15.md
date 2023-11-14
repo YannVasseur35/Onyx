@@ -1,4 +1,4 @@
-# Api Open Weather Map
+# Api Externe Open Weather Map
 
 On va pas se le cacher, notre exemple d'Api basé sur l'exemple d'un projet par default .net proposé par Visual Studio, n'est pas nouveau et à vrai dire, cela existe déjà sur le net. 
 

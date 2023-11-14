@@ -55,6 +55,8 @@ Vous avez deux façons de voir les choses :
 - [Step12 : Tests d'intégration](docs/steps/step12.md)
 - [Step13 : CI/CD AzureDevops Pipeline](docs/steps/step13.md)
 - [Step14 : Pipeline avec Code Coverage](docs/steps/step14.md)
+- [Step15 : Api Externe Open Weather Map](docs/steps/step15.md)
+- [Step16 : Sécurisation des données sensibles](docs/steps/step16.md)
 
 ## Git
 
