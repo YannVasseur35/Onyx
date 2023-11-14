@@ -23,7 +23,7 @@ namespace Onyx.Infrastructure.Services
                 throw new ArgumentNullException(paramName: "_apiKey", message: "OpenWeatherMapApiKey must not be null");
             }
 
-            string request = $"{_httpClient.GetBaseUrl()}/?appid={_apiKey}&q={city}";
+            string request = $"{_httpClient.GetBaseUrl()}/?appid={_apiKey}&units=metric&q={city}";
 
             HttpResponseMessage httpResponse = await _httpClient.HttpClient.GetAsync(request);
 

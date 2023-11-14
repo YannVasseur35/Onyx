@@ -113,8 +113,10 @@ public class WeatherForecastApiServicesTests
     {
         var builder = new ConfigurationBuilder();
 
-        var appSettings = @"{""OpenWeatherMapApiBaseUrl"" : ""https://api.openweathermap.org/data/3.0/onecall"", ""OpenWeatherMapApiKey"" : ""2ab3de3a263b8b265877be0c4acf25b3""}";
-
+        var appSettings = @"{
+            ""OpenWeatherMapApiBaseUrl"" : ""https://api.openweathermap.org/data/2.5/weather"",
+            ""OpenWeatherMapApiKey"" : ""2ab3de3a263b8b265877be0c4acf25b3""
+        }";
         builder.AddJsonStream(new MemoryStream(Encoding.UTF8.GetBytes(appSettings)));
 
         var configuration = builder.Build();
