@@ -146,8 +146,7 @@ Encore une fois, c'est pas cool d'avoir la clé API en clair dans ce test. On es
 
 # Conclusion
 
-On a rajouté plusieurs services afin d'aller chercher des données sur une API tierce et les fournir via notre APi Web. 
-Le service applicatif utilise le nouveau service d'infrastructure WeatherForecastApiServices. Si un jour on souhaite récupérer des données via une autre Api Web, on aura que cette partie infrastructure à modifier. 
+On a rajouté plusieurs couches de services afin d'aller chercher des données sur une API tierce et les fournir via notre APi Web. Le service applicatif utilise le nouveau service d'infrastructure WeatherForecastApiServices. Si un jour on souhaite récupérer des données via une autre Api Web, on aura que cette partie infrastructure à modifier. 
 
 L'API tierce OWM utilise une clé API que l'on stocke dans un fichier appsettings.json. Cette pratique n'est pas secure. Ajouter sur le repo git des clés, des passwords ou données sensible est à risque. Et meme si vous les effacez à l'avenir dans un nouveau commit, git garde tout et on pourra les retrouver (ya des techniques mais c'est relou)
 
