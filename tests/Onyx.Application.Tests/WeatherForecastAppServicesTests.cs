@@ -5,6 +5,7 @@
         private readonly IWeatherForecastAppServices _weatherForecastAppServices;
         private readonly Mock<INotificationsAppServices> _notificationsServices;
         private readonly Mock<IWeatherForecastDataServices> _weatherForecastDataServices;
+        private readonly Mock<IWeatherForecastApiServices> _weatherForecastApiServices;
         private readonly IMapper _mapper;
         private readonly Fixture _fixture;
 
@@ -12,6 +13,7 @@
         {
             _notificationsServices = new Mock<INotificationsAppServices>();
             _weatherForecastDataServices = new Mock<IWeatherForecastDataServices>();
+            _weatherForecastApiServices = new Mock<IWeatherForecastApiServices>();
 
             _fixture = new Fixture();
 
@@ -25,6 +27,7 @@
             _weatherForecastAppServices = new WeatherForecastAppServices(
                 _notificationsServices.Object,
                 _weatherForecastDataServices.Object,
+                _weatherForecastApiServices.Object,
                 _mapper
             );
         }

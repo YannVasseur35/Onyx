@@ -11,3 +11,4 @@ global using Microsoft.Extensions.Options;
 global using Onyx.Core.Interfaces;
 global using Onyx.Infrastructure.Datas;
 global using Onyx.Infrastructure.Services;
+global using Onyx.Core.Models.OpenWeatherMap;

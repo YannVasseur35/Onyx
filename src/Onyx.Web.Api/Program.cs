@@ -15,6 +15,10 @@ builder.Services.AddDbContext<OnyxDbContext>(options =>
 builder.Services.AddScoped<INotificationsAppServices, NotificationsAppServices>();
 builder.Services.AddScoped<IWeatherForecastAppServices, WeatherForecastAppServices>();
 builder.Services.AddScoped<IWeatherForecastDataServices, WeatherForecastDataServices>();
+builder.Services.AddScoped<IWeatherForecastApiServices, WeatherForecastApiServices>();
+
+//Add http client for OpenWeatherMap external API
+builder.Services.AddHttpClient<OpenWeatherMapHttpClient>();
 
 builder.Services.AddControllers();
 builder.Services.AddSwaggerGen();

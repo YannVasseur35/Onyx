@@ -53,6 +53,23 @@ namespace Onyx.Web.Api.Controllers
             return BadRequest(operation.ErrorMessage);
         }
 
+        [HttpGet]
+        [Route("/city/{city}")]
+        [ProducesResponseType(StatusCodes.Status200OK, Type = typeof(OpenWeatherMapResponseDto))]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> GetByCyAsync(string city)
+        {
+            if (string.IsNullOrEmpty(city))
+            {
+                return BadRequest();
+            }
+#pragma warning disable 86022
+            OpenWeatherMapResponseDto? res = await _weatherForecastAppServices.GetWeatherForecast(city);
+
+            return Ok(res);
+        }
+
         [HttpPost]
         [HttpPut]
         [Route("")]

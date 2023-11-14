@@ -1,18 +1,24 @@
-﻿namespace Onyx.Application.Services
+﻿using Onyx.Application.Dtos;
+using Onyx.Core.Models.OpenWeatherMap;
+
+namespace Onyx.Application.Services
 {
     public class WeatherForecastAppServices : IWeatherForecastAppServices
     {
         private readonly INotificationsAppServices _notificationsService;
         private readonly IWeatherForecastDataServices _weatherForecastDataServices;
+        private readonly IWeatherForecastApiServices _weatherForecastApiServices;
         private readonly IMapper _mapper;
 
         public WeatherForecastAppServices(
             INotificationsAppServices notificationsService,
             IWeatherForecastDataServices weatherForecastDataServices,
-            IMapper mapper)
+            IWeatherForecastApiServices weatherForecastApiServices,
+        IMapper mapper)
         {
             _notificationsService = notificationsService;
             _weatherForecastDataServices = weatherForecastDataServices;
+            _weatherForecastApiServices = weatherForecastApiServices;
             _mapper = mapper;
         }
 
@@ -83,6 +89,13 @@
             {
                 return operation.Build(ex.Message, false, OperationErrorType.Technical);
             }
+        }
+
+        public async Task<OpenWeatherMapResponseDto>? GetWeatherForecast(string city)
+        {
+            OpenWeatherMapResponseDto openWeatherMapResponseDto = await _weatherForecastApiServices.GetForecastAsync(city);
+
+            return openWeatherMapResponseDto;
         }
     }
 }
