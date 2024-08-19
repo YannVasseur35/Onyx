@@ -24,7 +24,7 @@ On a tous commencé par écrire un seul projet c# et tout mettre dedans, sans vr
 
 Je développe avec .net depuis plus de 20 ans. Et j'ai vu un certain nombre d'application (un bon paquet à vrai dire) finir dans ce que l'on appelle un "monolith legacy", très très dure à maintenir. Ces applications existent encore à l'heure ou j'écris ces lignes. Parfois on en est au deuxième projet de "refonte". Un cas typique est celui du projet ou l'on retrouve toute la logique métier dans les procédures SQL. Car c'est ce qui faisait vraiment gagner en pref à l'époque (et encore aujourd'hui). Mais seule la personne en charge de ces procédures stockées, souvent indéchiffrable et intestable, est en mesure de travailler dessus. Autre cas bancale, on a de la logique métier dans les pages web. Du coup on se retrouve à gérer à plusieurs endroits, du code qui fait plus ou moins la meme chose, au risque qu'un jour il ne fasse plus la même chose !
  
-Heureusement aujourd'hui on a énormement plus de techniques, d'outils et de services qui permettent d'appréhender les projets autrement. Les entreprises comprennent les enjeux et les risques de garder trop longtemps du code legacy en production et s'engagent dans de gigantesque chantier de "renovation" voir même de ré-écriture complète. J'ai moi aussi contribuer à ces erreurs et je contribue aussi à leurs résolutions. 
+Heureusement aujourd'hui on a énormement plus de techniques, d'outils et de services qui permettent d'appréhender les projets autrement. Les entreprises comprennent les enjeux et les risques de garder trop longtemps du code legacy en production et s'engagent dans de gigantesque chantier de "renovation" voir même de ré-écriture complète. J'ai moi aussi contribué à ces erreurs et je contribue aussi à leurs résolutions. 
 
 Ce projet tente modestement de répondre à certaines problématiques couramment vues en entreprise. Je ne prétends pas tout résoudre mais apporter quelques réponses à des questions que moi même je me suis posé. Et à vrai dire, le meilleurs moyen d'y répondre pour moi est de tenter de le faire comprendre à quelqu'un d'autre. 
 
@@ -58,7 +58,7 @@ Vous avez deux façons de voir les choses :
 
 ## Git
 
-Repo : https://dev.azure.com/ReactorLab/_git/Onyx
+Repo : https://github.com/YannVasseur35/Onyx
 
 Vous devrez connaitre quelques commandes git de base très simple pour "naviguer" dans les branches de ce repo. 
 
